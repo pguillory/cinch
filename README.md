@@ -175,23 +175,6 @@ You can mix _streamlined_ functions and traditional callback based functions in 
 The transformation engine will only convert the functions that have an underscore as one of their parameters.
 It will leave all other functions unmodified.
 
-Context propagation
--------------------
-
-Streamline also allows you to propagate a global context along a chain of calls and callbacks.
-This context can be used like TLS (Thread Local Storage) in a threaded environment.
-It allows you to have several active chains that each have their own global context. 
-
-This kind of context is very handy to store information that all calls should be able to access
-but that you don't want to pass explicitly via function parameters. The most obvious example is 
-the `locale` that each request may set differently and that your low level libraries should 
-be able to retrieve to format messages.
-
-The `streamline.flows` module exposes two functions to manipulate the context:
-
-* `setContext(ctx)` sets the context (and returns the old context).
-* `getContext()` returns the current context.
-
 Advanced options
 ----------------
 
