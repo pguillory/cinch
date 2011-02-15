@@ -199,32 +199,23 @@ the transformation engine (these constructs are questionable so I am not sure th
 Running _streamlined_ code
 ==========================
 
-You have two options to package _streamlined_ code.
-
-The first one is to use a special convention for your source file names. 
+Streamline uses a special convention for your source file names. 
 Instead of putting the source for module `xxx` into a file called `xxx.js`, you put it into
 a file called `xxx_.js`. When you _require_ `xxx` streamline will read the source from `xxx_.js`,
 transform it and save the transformed code into `xxx.js` and will pass the transformed source
 to node. 
-This option is the preferred option because it works well with debuggers and the transformed file will be cached.
 
 Note: node will not find your module if the `xxx.js` file does not exist. 
 So you have to create an empty `xxx.js` file to initiate the process.
 
-The second option is to add a special `!!STREAMLINE!!` marker in your source code (anywhere, usually 
-in a comment at the top) and to call your file `xxx.js`, as usual. 
-Streamline will detect the marker and transform your code before passing to node. 
-The drawback of this option is that the transformed code won't be cached and won't be not available for debugging.
+You can run it as a node script file directly from the command line:
 
-Once you have setup your _streamlined_ code with one of these options, 
-you can run it as a node script file directly from the command line:
-
-    node-streamline myscript.js [args]
+    node /path/to/streamline/run.js myscript.js [args]
 
 You can also initialize streamline from your main server script. 
 Just add the following line to your main server script:
 
-    require('streamline')
+    require('streamline').register();
 
 Node.js installation
 ====================
