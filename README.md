@@ -325,15 +325,6 @@ Just add the following line to your main server script:
 
     require('streamline')
 
-Running with CoffeeScript
-=========================
-
-You can also use `streamline.js` with CoffeeScript. To do so, just put the `!!STREAMLINE!!` marker
-in your coffeescript modules and run your program with 
-`coffee-streamline` instead of `coffee`. For example:
-
-	coffee-streamline myscript.coffee [args]
-
 Node.js installation
 ====================
 
