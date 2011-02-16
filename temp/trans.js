@@ -112,18 +112,21 @@ var get_ident = (function() {
 })()
 
 var source = fs.readFileSync('foo.js_', 'utf8')
-var n = narc.parser.parse(source)
-
-/*fs.writeFileSync('n_before.json', JSON.stringify(n), 'utf8')*/
-n.funDecls.forEach(transform_function)
-var transformed = pp(n) + '\n'
+var transformed = transform(source)
 fs.writeFileSync('foo.js', transformed, 'utf8')
-dump(n)
+
+function transform(source) {
+    var n = narc.parser.parse(source)
+    n.funDecls.forEach(transform_function)
+    var transformed = '/* streamlined */\n' + pp(n) + '\n'
+    dump(n)
+    return transformed
+}
 
 function dump(n) {
     strip(n)
     fs.writeFileSync('dump.json', JSON.stringify(n), 'utf8')
-    process.exit()
+    //process.exit()
 }
 
 function transform_function(func) {
@@ -171,13 +174,11 @@ function transform_children(children) {
                 break
             case RETURN:
                 if (is_streamlined_function_call(n.value)) {
-/*
                     n.value.children[0].value = strip_underscore(n.value.children[0].value)
                     n.value.children[1].children.push({
                         type: IDENTIFIER,
                         value: 'callback',
                     })
-*/
                 } else if (contains_streamlined_function_call(n.value.children)) {
                     console.log('return contains_streamlined_function_call')
                     var ident = get_ident()
@@ -202,7 +203,6 @@ function transform_children(children) {
 
                     n.value = found.n
                 } else if (contains_regular_function_call(n.value.children)) {
-/*
                     console.log('return contains_regular_function_call')
                     var ident = get_ident()
                     
@@ -218,7 +218,6 @@ function transform_children(children) {
                         }
                     }))
                     n.value = ident
-*/
                 } else {
                     n.value = snippets.callback_null(n.value)
                 }
