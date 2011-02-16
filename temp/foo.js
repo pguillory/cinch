@@ -1,4 +1,4 @@
-function f(a, b, callback) {
+function square_sum(a, b, callback) {
     function square(x, callback) {
         return callback(null, (x * x));
     };
@@ -6,6 +6,11 @@ function f(a, b, callback) {
         if (err) {
             return callback(err)
         };
-        return ((1 + result) + 1);
+        return square(b, function(err, result) {
+            if (err) {
+                return callback(err)
+            };
+            return callback(null, ((result + result) + syncFunc()));
+        });
     });
 };

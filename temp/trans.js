@@ -5,31 +5,54 @@ var tokens = narc.definitions.tokens
 var pp = narc.decompiler.pp
 
 eval(narc.definitions.consts);
-var IF_ERR_RETURN_CALLBACK_ERR = {
-    type: IF,
-    condition: {
-        type: IDENTIFIER,
-        value: 'err',
-    },
-    thenPart: {
-        type: RETURN,
-        value: {
+var snippets = {
+    callback_null: function(n) {
+        return {
             type: CALL,
             children: [
                 {
                     type: IDENTIFIER,
-                    value: 'callback'
+                    value: 'callback',
                 },
                 {
                     type: LIST,
                     children: [
                         {
-                            type: IDENTIFIER,
-                            value: 'err'
-                        }
+                            type: NULL,
+                            value: 'null',
+                        },
+                        n
                     ]
                 }
             ]
+        }
+    },
+    if_err_return_callback_err: {
+        type: IF,
+        condition: {
+            type: IDENTIFIER,
+            value: 'err',
+        },
+        thenPart: {
+            type: RETURN,
+            value: {
+                type: CALL,
+                children: [
+                    {
+                        type: IDENTIFIER,
+                        value: 'callback'
+                    },
+                    {
+                        type: LIST,
+                        children: [
+                            {
+                                type: IDENTIFIER,
+                                value: 'err'
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     }
 }
@@ -83,6 +106,7 @@ function transform_children(children) {
         switch (n.type) {
             case RETURN:
                 if (is_streamlined_function_call(n.value)) {
+                    // return f(a, b, callback)
                     n.value.children[0].value = strip_underscore(n.value.children[0].value)
                     n.value.children[1].children.push({
                         type: IDENTIFIER,
@@ -96,26 +120,27 @@ function transform_children(children) {
                         type: IDENTIFIER,
                         value: 'result',
                     }
-                    found.n.children[0].value = strip_underscore(found.n.children[0].value)
-                    found.n.children[1].children.push({
+                    var callback = {
                         type: FUNCTION,
                         params: ['err', 'result'],
                         body: {
                             type: SCRIPT,
-                            value: '{',
                             children: [
-                                IF_ERR_RETURN_CALLBACK_ERR,
+                                snippets.if_err_return_callback_err,
                                 {
                                     type: RETURN,
                                     value: n.value
                                 }
                             ]
                         }
-                    })
+                    }
+                    transform_children(callback.body.children)
+                    found.n.children[0].value = strip_underscore(found.n.children[0].value)
+                    found.n.children[1].children.push(callback)
 
                     n.value = found.n
                 } else {
-                    transform_return(n)
+                    n.value = snippets.callback_null(n.value)
                 }
                 break
             case FUNCTION:
@@ -166,30 +191,6 @@ function find_streamlined_function_call(children) {
         if (result) return result
     }
     return null
-}
-
-function transform_return(n) {
-    console.log('transforming return')
-
-    n.value = {
-        type: CALL,
-        children: [
-            {
-                type: IDENTIFIER,
-                value: 'callback',
-            },
-            {
-                type: LIST,
-                children: [
-                    {
-                        type: NULL,
-                        value: 'null',
-                    },
-                    n.value
-                ]
-            }
-        ]
-    }
 }
 
 function transform_call(n) {
