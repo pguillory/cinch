@@ -11,10 +11,9 @@ $(document).ready(function(){
 			return s.replace(/[\n\t ]/g, '').replace(/};/g, '}').replace(/\(_\|\|__throw\)/g, '_||__throw');
 	}
 	
-	function genTest(f1, f2, withTryCatch){
+	function genTest(f1, f2){
 		var s1 = clean(transform(f1.toString(), {
-			noHelpers: true,
-			noTryCatch: !withTryCatch
+			noHelpers: true
 		}));
 		var s2 = clean(f2.toString());
 		if (s1 !== s2) {
@@ -684,9 +683,7 @@ $(document).ready(function(){
 		delay = delayUnsafe;
 		evalTest1(f, val, null, function(){
 			delay = delaySafe;
-			evalTest1(f, val, {
-				noTryCatch: true
-			}, start)
+			evalTest1(f, val, {}, start)
 		})
 	}
 	

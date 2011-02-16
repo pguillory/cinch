@@ -1,5 +1,5 @@
 if (typeof require === 'function') {
-    var Streamline = require('../lib');
+    var Streamline = require('..');
     var log = console.log
 } else {
     // Streamline should already have been included
@@ -51,7 +51,7 @@ var tests = {
             return 5;
         }
 
-        eval(Streamline.transform(f_.toString()));
+        eval(Streamline.transform(f_));
 
         f(function(err, result) {
             assert.null(err);
@@ -105,18 +105,15 @@ var tests = {
 
     'Function that calls another streamlined function': function(next) {
         function f_() {
-            g_();
+            return g_();
         }
         function g_() {
             return 5;
         }
 
         eval(Streamline.transform(f_.toString() + g_.toString()));
-        console.log(Streamline.transform(f_.toString() + g_.toString()))
 
         f(function(err, result) {
-            console.log('err: ' + err)
-            console.log('result: ' + result)
             assert.null(err);
             assert.true(result === 5);
             next();

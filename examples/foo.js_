@@ -1,0 +1,11 @@
+var fs = require('fs');
+
+function fileLength_(path) {
+  if (fs.stat_(path).isFile()) {
+    return fs.readFile_(path).length;
+  } else {
+    throw new Error(path + " is not a file");
+  }
+}
+
+exports.fileLength = fileLength;

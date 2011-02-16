@@ -1,2 +1,2 @@
-exports.register = require('./lib/register').register;
+exports.registerExtension = require('./lib/registerExtension').register;
 exports.transform = require("./lib/transform").transform;
