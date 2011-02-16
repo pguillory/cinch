@@ -103,7 +103,7 @@ var tests = {
         })
     },
 
-    'Function that calls another streamlined function': function(next) {
+    'Chained streamlined funcs return through': function(next) {
         function f_() {
             return g_();
         }
@@ -116,6 +116,17 @@ var tests = {
         f(function(err, result) {
             assert.null(err);
             assert.true(result === 5);
+            next();
+        })
+    },
+
+    'Function called without a callback does not throw': function(next) {
+        function f_() {
+        }
+
+        eval(Streamline.transform(f_.toString()));
+
+        f(function(err, result) {
             next();
         })
     },
