@@ -1,0 +1,1 @@
+{"type":"return(87)","value":{"type":"+(24)","value":"+","children":[{"type":"CALL(46)","value":"(","children":[{"type":"IDENTIFIER(60)","value":"square_","children":[]},{"type":"LIST(55)","value":"(","children":[{"type":"IDENTIFIER(60)","value":"a","children":[]}]}]},{"type":"IDENTIFIER(60)","value":"b","children":[]}]},"children":[]}
