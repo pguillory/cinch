@@ -111,7 +111,7 @@ var get_ident = (function() {
     }
 })()
 
-var source = fs.readFileSync('foo_.js', 'utf8')
+var source = fs.readFileSync('foo.js_', 'utf8')
 var n = narc.parser.parse(source)
 
 /*fs.writeFileSync('n_before.json', JSON.stringify(n), 'utf8')*/
