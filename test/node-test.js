@@ -46,12 +46,12 @@ var assert = {
 }
 
 var tests = {
-/*
     'Function with return statement': function(next) {
         function f_() {
             return 5;
         }
 
+        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
         console.log(t)
         eval(t);
@@ -62,12 +62,12 @@ var tests = {
             next();
         })
     },
-*/
 
     'Function with no return statement': function(next) {
         function f_() {
         }
 
+        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
         console.log(t)
         eval(t);
@@ -84,6 +84,7 @@ var tests = {
             throw new Error();
         }
 
+        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
         console.log(t)
         eval(t);
@@ -99,16 +100,18 @@ var tests = {
         function f_() {
             g();
         }
+        var g_called = false
         function g() {
-            this.called = true;
+            g_called = true;
         }
 
+        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
         console.log(t)
         eval(t);
 
         f(function(err, result) {
-            assert.true(g.called);
+            assert.true(g_called);
             next();
         })
     },
@@ -117,11 +120,14 @@ var tests = {
         function f_() {
             return g_();
         }
-        function g_() {
-            return 5;
+        function g(callback) {
+            return callback(null, 5)
         }
 
-        eval(Streamline.transform(f_.toString() + g_.toString()));
+        console.log(f_.toString())
+        var t = Streamline.transform(f_.toString())
+        console.log(t)
+        eval(t);
 
         f(function(err, result) {
             assert.null(err);
@@ -134,11 +140,13 @@ var tests = {
         function f_() {
         }
 
-        eval(Streamline.transform(f_.toString()));
+        console.log(f_.toString())
+        var t = Streamline.transform(f_.toString())
+        console.log(t)
+        eval(t);
 
-        f(function(err, result) {
-            next();
-        })
+        f()
+        next();
     },
 }
 
