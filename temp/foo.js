@@ -1,16 +1,22 @@
-function square_sum(a, b, callback) {
+function sum_squares(a, b, callback) {
     function square(x, callback) {
         return callback(null, (x * x));
     };
-    return square(a, function(err, result) {
+    foo();
+    return square(a, function(err, result55) {
         if (err) {
             return callback(err)
         };
-        return square(b, function(err, result) {
+        return square(b, function(err, result55) {
             if (err) {
                 return callback(err)
             };
-            return callback(null, ((result + result) + syncFunc()));
+            try {
+                result1 = ((result55 + result55) + syncFunc());
+            } catch (err) {
+                return callback(err);
+            };
+            return result1;
         });
     });
 };
