@@ -2,16 +2,46 @@ var util = require('util')
 var fs = require('fs')
 var narc = require('../lib/narcissus')
 var tokens = narc.definitions.tokens
-var source = fs.readFileSync('foo_.js', 'utf8')
-var n = new narc.parser.parse(source)
+var pp = narc.decompiler.pp
 
-/*console.log(narc.definitions.consts)*/
 eval(narc.definitions.consts);
+var IF_ERR_RETURN_CALLBACK_ERR = {
+    type: IF,
+    condition: {
+        type: IDENTIFIER,
+        value: 'err',
+    },
+    thenPart: {
+        type: RETURN,
+        value: {
+            type: CALL,
+            children: [
+                {
+                    type: IDENTIFIER,
+                    value: 'callback'
+                },
+                {
+                    type: LIST,
+                    children: [
+                        {
+                            type: IDENTIFIER,
+                            value: 'err'
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+
+var source = fs.readFileSync('foo_.js', 'utf8')
+var n = narc.parser.parse(source)
 
 /*fs.writeFileSync('n_before.json', JSON.stringify(n), 'utf8')*/
 n.funDecls.forEach(scan_function)
-var transformed = narc.decompiler.pp(n) + '\n'
+var transformed = pp(n) + '\n'
 fs.writeFileSync('foo.js', transformed, 'utf8')
+dump(n)
 
 function dump(n) {
     strip(n)
@@ -52,15 +82,49 @@ function transform_children(children) {
         console.log('child ' + tokens[n.type])
         switch (n.type) {
             case RETURN:
-                transform_return(n)
+                if (is_streamlined_function_call(n.value)) {
+                    n.value.children[0].value = strip_underscore(n.value.children[0].value)
+                    n.value.children[1].children.push({
+                        type: IDENTIFIER,
+                        value: 'callback',
+                    })
+                } else if (contains_streamlined_function_call(n.value.children)) {
+                    console.log('return contains_streamlined_function_call')
+                    var children_left = children.splice(parseInt(i) + 1)
+                    var found = find_streamlined_function_call(n.value.children)
+                    found.children[found.i] = {
+                        type: IDENTIFIER,
+                        value: 'result',
+                    }
+                    found.n.children[0].value = strip_underscore(found.n.children[0].value)
+                    found.n.children[1].children.push({
+                        type: FUNCTION,
+                        params: ['err', 'result'],
+                        body: {
+                            type: SCRIPT,
+                            value: '{',
+                            children: [
+                                IF_ERR_RETURN_CALLBACK_ERR,
+                                {
+                                    type: RETURN,
+                                    value: n.value
+                                }
+                            ]
+                        }
+                    })
+
+                    n.value = found.n
+                } else {
+                    transform_return(n)
+                }
                 break
             case FUNCTION:
                 break
             case CALL:
-                console.log('call to ' + n.children[0].value)
-                if (n.children[0].type === IDENTIFIER && ends_with_underscore(n.children[0].value)) {
+                if (is_streamlined_function_call(n)) {
                     transform_call(n)
                 }
+                console.log('call to ' + n.children[0].value)
                 break
             default:
                 transform_children(n.children)
@@ -69,9 +133,44 @@ function transform_children(children) {
     }
 }
 
+function is_streamlined_function_call(n) {
+    return n.type === CALL
+        && n.children[0].type === IDENTIFIER
+        && ends_with_underscore(n.children[0].value)
+}
+
+function contains_streamlined_function_call(children) {
+    for (var i in children) {
+        var n = children[i]
+        if (is_streamlined_function_call(n)) {
+            return true
+        }
+        if (contains_streamlined_function_call(n.children)) {
+            return true
+        }
+    }
+    return false
+}
+
+function find_streamlined_function_call(children) {
+    for (var i in children) {
+        var n = children[i]
+        if (is_streamlined_function_call(n)) {
+            return {
+                n: n,
+                children: children,
+                i: i,
+            }
+        }
+        var result = find_streamlined_function_call(n.children)
+        if (result) return result
+    }
+    return null
+}
+
 function transform_return(n) {
     console.log('transforming return')
-    transform_children(n.value.children)
+
     n.value = {
         type: CALL,
         children: [
@@ -96,6 +195,10 @@ function transform_return(n) {
 function transform_call(n) {
     console.log('transforming call to ' + n.children[0].value)
     n.children[0].value = strip_underscore(n.children[0].value)
+    n.children[1].push({
+        type: FUNCTION,
+        params: ['err', 'result']
+    })
 }
 
 function strip(tree) {
