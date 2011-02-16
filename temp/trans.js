@@ -54,7 +54,23 @@ var snippets = {
                 ]
             }
         }
-    }
+    },
+    function_err_result: function(n) {
+        return {
+            type: FUNCTION,
+            params: ['err', 'result'],
+            body: {
+                type: SCRIPT,
+                children: [
+                    snippets.if_err_return_callback_err,
+                    {
+                        type: RETURN,
+                        value: n
+                    }
+                ]
+            }
+        }
+    },
 }
 
 var source = fs.readFileSync('foo_.js', 'utf8')
@@ -108,6 +124,7 @@ function transform_children(children) {
                 if (is_streamlined_function_call(n.value)) {
                     // return f(a, b, callback)
                     n.value.children[0].value = strip_underscore(n.value.children[0].value)
+                    transform_children(n.value.children[1].children)
                     n.value.children[1].children.push({
                         type: IDENTIFIER,
                         value: 'callback',
@@ -120,22 +137,10 @@ function transform_children(children) {
                         type: IDENTIFIER,
                         value: 'result',
                     }
-                    var callback = {
-                        type: FUNCTION,
-                        params: ['err', 'result'],
-                        body: {
-                            type: SCRIPT,
-                            children: [
-                                snippets.if_err_return_callback_err,
-                                {
-                                    type: RETURN,
-                                    value: n.value
-                                }
-                            ]
-                        }
-                    }
+                    var callback = snippets.function_err_result(n.value)
                     transform_children(callback.body.children)
                     found.n.children[0].value = strip_underscore(found.n.children[0].value)
+                    transform_children(found.n.children[1].children)
                     found.n.children[1].children.push(callback)
 
                     n.value = found.n
