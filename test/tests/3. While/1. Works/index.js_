@@ -1,0 +1,50 @@
+exports.test = function(next, assert) {
+    pow(2, 3, function(err, result) {
+        assert.equal(result, 8)
+        next()
+    })
+}
+
+function pow_(base, exponent) {
+    function g_() {
+        return exponent--
+    }
+
+    var n = 1
+    while (g_() > 0) {
+        n *= base
+    }
+    return n
+}
+
+/*
+function f(callback) {
+    var n = 1
+    next()
+    function next() {
+        if (g_() > 0) {
+            n *= 2
+            setTimeout(next, 0)
+        } else {
+            return n
+        }
+    }
+}
+
+function f(callback) {
+    var n = 1
+    next()
+    function next() {
+        g(function(err, result) {
+            if (err) return callback(err)
+
+            if (result > 0) {
+                n *= 2
+                setTimeout(next, 0)
+            } else {
+                return callback(null, n)
+            }
+        })
+    }
+}
+*/
