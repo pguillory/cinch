@@ -1,0 +1,8 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        next()
+    })
+}
+
+var f = function _() {
+}
