@@ -1,0 +1,4 @@
+function f_() {
+}
+
+exports.f = f

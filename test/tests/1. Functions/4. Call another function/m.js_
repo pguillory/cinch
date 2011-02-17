@@ -1,0 +1,9 @@
+function f_() {
+    g();
+}
+exports.g_called = false
+function g() {
+    exports.g_called = true;
+}
+
+exports.f = f
