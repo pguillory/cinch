@@ -1,0 +1,7 @@
+exports.test = function(next, assert) {
+    f()
+    next();
+}
+
+function f_() {
+}

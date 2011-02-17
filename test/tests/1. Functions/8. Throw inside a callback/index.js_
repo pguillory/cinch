@@ -1,0 +1,16 @@
+var test_error = new Error()
+
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(err, test_error)
+        next()
+    })
+}
+
+function f_() {
+    return g() + 1
+}
+
+function g() {
+    throw test_error
+}

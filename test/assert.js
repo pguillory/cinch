@@ -1,26 +1,26 @@
 var assert = exports
 
-assert.true = function(value) {
+assert.is_true = function(value) {
     if (value !== true) {
-        throw new Error('true(' + value + ')');
+        throw new Error('is_true(' + value + ')');
     }
 }
 
-assert.false = function(value) {
+assert.is_false = function(value) {
     if (value !== false) {
-        throw new Error('false(' + value + ')');
+        throw new Error('is_false(' + value + ')');
     }
 }
 
-assert.null = function(value) {
+assert.is_null = function(value) {
     if (value !== null) {
-        throw new Error('null(' + value + ')');
+        throw new Error('is_null(' + value + ')');
     }
 }
 
-assert.undefined = function(value) {
+assert.is_undefined = function(value) {
     if (value !== undefined) {
-        throw new Error('undefined(' + value + ')');
+        throw new Error('is_undefined(' + value + ')');
     }
 }
 
@@ -30,8 +30,15 @@ assert.is = function(value, prototype) {
     }
 }
 
-assert.error = function(value) {
+assert.is_error = function(value) {
     if (typeof value !== 'object' || value.constructor !== Error) {
-        throw new Error('error(' + value.constructor + ')');
+        throw new Error('is_error(' + value.constructor + ')');
+    }
+}
+
+
+assert.equal = function(a, b) {
+    if (a !== b) {
+        throw new Error('equal(' + a + ', ' + b + ')');
     }
 }

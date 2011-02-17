@@ -1,0 +1,13 @@
+exports.test = function(next, assert) {
+    sum_squares(3, 4, function(err, result) {
+        assert.equal(result, 5 * 5)
+        next()
+    })
+}
+
+function sum_squares_(a, b) {
+    return square_(a) + square_(b)
+}
+function square_(x) {
+    return x * x
+}
