@@ -13,7 +13,7 @@ exports.test = function(next, assert) {
     });
 };
 function fileLength(path, callback) {
-    fs.stat(path, function(err, result10) {
+    fs.stat(path, function(err, result11) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -21,8 +21,8 @@ function fileLength(path, callback) {
                 throw err
             }
         };
-        if (result10.isFile()) {
-            fs.readFile(path, function(err, result11) {
+        if (result11.isFile()) {
+            fs.readFile(path, function(err, result12) {
                 if (err) {
                     if (callback) {
                         return callback(err)
@@ -31,7 +31,7 @@ function fileLength(path, callback) {
                     }
                 };
                 if (callback) {
-                    return callback(null, result11.length)
+                    return callback(null, result12.length)
                 };
             });
         }

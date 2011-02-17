@@ -6,7 +6,7 @@ exports.test = function(next, assert) {
     });
 };
 function sum_squares(a, b, callback) {
-    square(a, function(err, result2) {
+    square(a, function(err, result3) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -14,7 +14,7 @@ function sum_squares(a, b, callback) {
                 throw err
             }
         };
-        square(b, function(err, result3) {
+        square(b, function(err, result4) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -23,7 +23,7 @@ function sum_squares(a, b, callback) {
                 }
             };
             if (callback) {
-                return callback(null, (result2 + result3))
+                return callback(null, (result3 + result4))
             };
         });
     });

@@ -1,0 +1,15 @@
+
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.is_true(g_called);
+        next();
+    })
+}
+
+function f_() {
+    g();
+}
+var g_called = false
+function g() {
+    g_called = true;
+}

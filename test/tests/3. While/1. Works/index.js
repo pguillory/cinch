@@ -12,9 +12,9 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    next12();
-    function next12() {
-        g(function(err, result13) {
+    next13();
+    function next13() {
+        g(function(err, result14) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -22,9 +22,9 @@ function pow(base, exponent, callback) {
                     throw err
                 }
             };
-            if ((result13 > 0)) {
+            if ((result14 > 0)) {
                 n *= base;
-                next12();
+                next13();
             }
              else {
                 if (callback) {
