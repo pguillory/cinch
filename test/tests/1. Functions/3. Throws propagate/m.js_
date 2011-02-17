@@ -1,5 +1,0 @@
-function f_() {
-    throw new Error();
-}
-
-exports.f = f

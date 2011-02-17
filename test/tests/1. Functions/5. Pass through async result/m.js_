@@ -1,8 +1,0 @@
-function f_() {
-    return g_();
-}
-function g(callback) {
-    return callback(null, 5)
-}
-
-exports.f = f

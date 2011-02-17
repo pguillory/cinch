@@ -1,5 +1,0 @@
-function f_() {
-    return 5;
-}
-
-exports.f = f
