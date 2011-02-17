@@ -1,5 +1,4 @@
 var Streamline = require('..');
-var log = console.log
 var assert = require('./assert')
 var fs = require('fs')
 var path = require('path')
@@ -19,13 +18,13 @@ fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
     })
 })
 
-log('*** Running tests. ***');
+console.log('*** Running tests. ***');
 ;(function next() {
     for (var name in tests) {
         var test = tests[name];
         delete tests[name];
-        log('* ' + name);
+        console.log(name);
         return test(next, assert);
     }
-    log('*** All tests passed. ***');
+    console.log('\n*** All tests passed. ***\n');
 })();

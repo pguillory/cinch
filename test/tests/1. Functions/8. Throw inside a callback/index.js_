@@ -1,16 +1,25 @@
 var test_error = new Error()
 
 exports.test = function(next, assert) {
-    f(function(err, result) {
+    f(true, function(err, result) {
         assert.equal(err, test_error)
-        next()
+
+        f(false, function(err, result) {
+            assert.is_null(err)
+            assert.equal(result, 2)
+            next()
+        })
     })
 }
 
-function f_() {
-    return g() + 1
+function f_(crash) {
+    return g(crash) + 1
 }
 
-function g() {
-    throw test_error
+function g(crash) {
+    if (crash) {
+        throw test_error
+    } else {
+        return 1
+    }
 }
