@@ -1,0 +1,16 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(result, 6)
+        next()
+    })
+}
+
+function f_() {
+    if (g_()) {
+        return 6
+    }
+}
+
+function g_() {
+    return true
+}

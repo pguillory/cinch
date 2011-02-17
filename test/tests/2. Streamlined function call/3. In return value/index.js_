@@ -1,0 +1,14 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(result, 6)
+        next()
+    })
+}
+
+function f_() {
+    return g_() + 1
+}
+
+function g_() {
+    return 5
+}
