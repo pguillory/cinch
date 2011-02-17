@@ -18,5 +18,6 @@ function fileLength_(path) {
     return fs.readFile_(path).length;
   } else {
     throw new Error(path + " is not a file");
+    a = b
   }
 }

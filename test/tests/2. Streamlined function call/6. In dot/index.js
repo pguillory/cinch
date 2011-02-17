@@ -36,10 +36,13 @@ function fileLength(path, callback) {
             });
         }
          else {
-            if (callback) {
-                return callback(new Error((path + " is not a file")))
-            } else {
-                throw err
+            {
+                var err = new Error((path + " is not a file"));
+                if (callback) {
+                    return callback(err)
+                } else {
+                    throw err
+                };
             };
         }
     ;

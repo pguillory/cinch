@@ -14,10 +14,13 @@ function f(callback) {
                 throw err
             }
         };
-        if (callback) {
-            return callback((result9 + 1))
-        } else {
-            throw err
+        {
+            var err = (result9 + 1);
+            if (callback) {
+                return callback(err)
+            } else {
+                throw err
+            };
         };
     });
 };

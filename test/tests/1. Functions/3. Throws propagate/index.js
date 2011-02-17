@@ -7,9 +7,12 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    if (callback) {
-        return callback(new Error())
-    } else {
-        throw err
+    {
+        var err = new Error();
+        if (callback) {
+            return callback(err)
+        } else {
+            throw err
+        };
     };
 };
