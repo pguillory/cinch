@@ -7,7 +7,18 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    return g(callback);
+    g(function(err, result1) {
+        if (err) {
+            if (callback) {
+                return callback(err)
+            } else {
+                throw err
+            }
+        };
+        if (callback) {
+            return callback(null, result1)
+        };
+    });
 };
 function g(callback) {
     return callback(null, 5);
