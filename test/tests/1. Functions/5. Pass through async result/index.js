@@ -17,6 +17,8 @@ function f(callback) {
         };
         if (callback) {
             return callback(null, result2)
+        } else {
+            return
         };
     });
 };

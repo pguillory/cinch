@@ -17,11 +17,15 @@ function f(callback) {
         var result = (result7 + 1);
         if (callback) {
             return callback(null, result)
+        } else {
+            return
         };
     });
 };
 function g(callback) {
     if (callback) {
         return callback(null, 5)
+    } else {
+        return
     };
 };

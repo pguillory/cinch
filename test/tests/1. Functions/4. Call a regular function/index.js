@@ -9,6 +9,8 @@ function f(callback) {
     g();
     if (callback) {
         return callback(null)
+    } else {
+        return
     };
 };
 var g_called = false;

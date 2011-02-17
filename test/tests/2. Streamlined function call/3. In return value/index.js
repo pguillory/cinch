@@ -16,11 +16,15 @@ function f(callback) {
         };
         if (callback) {
             return callback(null, (result8 + 1))
+        } else {
+            return
         };
     });
 };
 function g(callback) {
     if (callback) {
         return callback(null, 5)
+    } else {
+        return
     };
 };

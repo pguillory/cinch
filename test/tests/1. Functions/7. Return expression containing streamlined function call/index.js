@@ -24,6 +24,8 @@ function sum_squares(a, b, callback) {
             };
             if (callback) {
                 return callback(null, (result3 + result4))
+            } else {
+                return
             };
         });
     });
@@ -31,5 +33,7 @@ function sum_squares(a, b, callback) {
 function square(x, callback) {
     if (callback) {
         return callback(null, (x * x))
+    } else {
+        return
     };
 };

@@ -32,6 +32,8 @@ function fileLength(path, callback) {
                 };
                 if (callback) {
                     return callback(null, result12.length)
+                } else {
+                    return
                 };
             });
         }

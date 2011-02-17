@@ -18,11 +18,15 @@ function f(callback) {
         result = (result6 + 1);
         if (callback) {
             return callback(null, result)
+        } else {
+            return
         };
     });
 };
 function g(callback) {
     if (callback) {
         return callback(null, 5)
+    } else {
+        return
     };
 };

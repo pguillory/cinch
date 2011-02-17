@@ -22,6 +22,8 @@ function f(crash, callback) {
     };
     if (callback) {
         return callback(null, result5)
+    } else {
+        return
     };
 };
 function g(crash) {

@@ -17,6 +17,8 @@ function f(callback) {
         if ((result9 === 5)) {
             if (callback) {
                 return callback(null, 6)
+            } else {
+                return
             };
         }
     ;
@@ -25,5 +27,7 @@ function f(callback) {
 function g(callback) {
     if (callback) {
         return callback(null, 5)
+    } else {
+        return
     };
 };

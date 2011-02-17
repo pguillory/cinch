@@ -1,0 +1,19 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(result, 6)
+        next()
+    })
+}
+
+function f_() {
+    switch (g_()) {
+        case 5:
+            return 6
+        default:
+            return 7
+    }
+}
+
+function g_() {
+    return 5
+}

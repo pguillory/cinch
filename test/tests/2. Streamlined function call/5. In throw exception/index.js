@@ -27,5 +27,7 @@ function f(callback) {
 function g(callback) {
     if (callback) {
         return callback(null, 5)
+    } else {
+        return
     };
 };

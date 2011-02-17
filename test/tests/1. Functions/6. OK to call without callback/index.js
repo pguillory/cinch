@@ -6,5 +6,7 @@ exports.test = function(next, assert) {
 function f(callback) {
     if (callback) {
         return callback(null)
+    } else {
+        return
     };
 };
