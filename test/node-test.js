@@ -1,101 +1,12 @@
-if (typeof require === 'function') {
-    var Streamline = require('..');
-    var log = console.log
-} else {
-    // Streamline should already have been included
-    var log = function(value) {
-        value = value.replace(/&/g, '&amp;')
-        value = value.replace(/>/g, '&gt;')
-        value = value.replace(/</g, '&lt;')
-        value = value.replace(/"/g, '&quot;')
-        document.write(value + '<br/>')
-    }
-}
+var Streamline = require('..');
+var log = console.log
+var assert = require('./assert')
+var fs = require('fs')
+var path = require('path')
 
-var assert = {
-    'true': function(value) {
-        if (value !== true) {
-            throw new Error('true(' + value + ')');
-        }
-    },
-    'false': function(value) {
-        if (value !== false) {
-            throw new Error('false(' + value + ')');
-        }
-    },
-    'null': function(value) {
-        if (value !== null) {
-            throw new Error('null(' + value + ')');
-        }
-    },
-    'undefined': function(value) {
-        if (value !== undefined) {
-            throw new Error('undefined(' + value + ')');
-        }
-    },
-    'is': function(value, prototype) {
-        if (typeof value !== 'object' || value.constructor !== prototype) {
-            throw new Error('is(' + value + ', ' + prototype + ')');
-        }
-    },
-    'error': function(value) {
-        if (typeof value !== 'object' || value.constructor !== Error) {
-            throw new Error('error(' + value.constructor + ')');
-        }
-    },
-}
+Streamline.registerExtension()
 
 var tests = {
-    'Function with return statement': function(next) {
-        function f_() {
-            return 5;
-        }
-
-        console.log(f_.toString())
-        var t = Streamline.transform(f_.toString())
-        console.log(t)
-        eval(t);
-
-        f(function(err, result) {
-            assert.null(err);
-            assert.true(result === 5);
-            next();
-        })
-    },
-
-    'Function with no return statement': function(next) {
-        function f_() {
-        }
-
-        console.log(f_.toString())
-        var t = Streamline.transform(f_.toString())
-        console.log(t)
-        eval(t);
-
-        f(function(err, result) {
-            assert.null(err);
-            assert.undefined(result);
-            next();
-        })
-    },
-
-    'Function that throws': function(next) {
-        function f_() {
-            throw new Error();
-        }
-
-        console.log(f_.toString())
-        var t = Streamline.transform(f_.toString())
-        console.log(t)
-        eval(t);
-
-        f(function(err, result) {
-            assert.error(err);
-            assert.undefined(result);
-            next();
-        })
-    },
-
     'Function that calls another function': function(next) {
         function f_() {
             g();
@@ -105,9 +16,7 @@ var tests = {
             g_called = true;
         }
 
-        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
-        console.log(t)
         eval(t);
 
         f(function(err, result) {
@@ -124,9 +33,7 @@ var tests = {
             return callback(null, 5)
         }
 
-        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
-        console.log(t)
         eval(t);
 
         f(function(err, result) {
@@ -140,9 +47,7 @@ var tests = {
         function f_() {
         }
 
-        console.log(f_.toString())
         var t = Streamline.transform(f_.toString())
-        console.log(t)
         eval(t);
 
         f()
@@ -150,13 +55,23 @@ var tests = {
     },
 }
 
+fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
+    console.log('scanning chapter: ' + chapter)
+    fs.readdirSync(path.join(__dirname, 'tests', chapter)).forEach(function(test_name) {
+        console.log('adding test: ' + test_name)
+        var test = require(path.join(__dirname, 'tests', chapter, test_name)).test
+        //fs.unlinkSync(path.join(__dirname, 'tests', chapter, test_name, 'm.js'))
+        tests['[' + chapter + '] ' + test_name] = test
+    })
+})
+
 log('*** Running tests. ***');
 ;(function next() {
     for (var name in tests) {
         var test = tests[name];
         delete tests[name];
         log('* ' + name);
-        return test(next);
+        return test(next, assert);
     }
     log('*** All tests passed. ***');
 })();
