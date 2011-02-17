@@ -1,14 +1,12 @@
 exports.test = function(next, assert) {
     f(function(err, result) {
-        assert.equal(result, 6)
+        assert.equal(err, 6)
         next()
     })
 }
 
 function f_() {
-    if (g_() === 5) {
-        return 6
-    }
+    throw g_() + 1
 }
 
 function g_() {
