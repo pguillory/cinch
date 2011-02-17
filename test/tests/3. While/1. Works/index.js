@@ -14,9 +14,9 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    next14();
-    function next14() {
-        g(function(err, result15) {
+    next16();
+    function next16() {
+        g(function(err, result17) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -24,9 +24,9 @@ function pow(base, exponent, callback) {
                     throw err
                 }
             };
-            if ((result15 > 0)) {
+            if ((result17 > 0)) {
                 n *= base;
-                next14();
+                next16();
             }
              else {
                 if (callback) {
