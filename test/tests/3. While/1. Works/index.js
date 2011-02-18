@@ -14,9 +14,9 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    setTimeout(while_loop1, 0);
-    function while_loop1() {
-        g(function(err, result2) {
+    setTimeout(__while_loop_1, 0);
+    function __while_loop_1() {
+        g(function(err, __async_result_2) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -24,9 +24,9 @@ function pow(base, exponent, callback) {
                     throw err
                 }
             };
-            if ((result2 > 0)) {
+            if ((__async_result_2 > 0)) {
                 n *= base;
-                setTimeout(while_loop1, 0);
+                setTimeout(__while_loop_1, 0);
             }
              else {
                 if (callback) {

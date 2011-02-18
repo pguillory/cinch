@@ -54,7 +54,7 @@ function f(callback) {
         };
     };
     function catch_block(err, callback) {
-        g(function(err, result1) {
+        g(function(err, __async_result_1) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -62,7 +62,7 @@ function f(callback) {
                     throw err
                 }
             };
-            result1;
+            __async_result_1;
             if (callback) {
                 return callback(null)
             } else {

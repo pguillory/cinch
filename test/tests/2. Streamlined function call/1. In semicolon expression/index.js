@@ -7,7 +7,7 @@ exports.test = function(next, assert) {
 };
 function f(callback) {
     var result;
-    g(function(err, result1) {
+    g(function(err, __async_result_1) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -15,7 +15,7 @@ function f(callback) {
                 throw err
             }
         };
-        result = (result1 + 1);
+        result = (__async_result_1 + 1);
         if (callback) {
             return callback(null, result)
         } else {

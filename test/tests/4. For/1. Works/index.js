@@ -11,7 +11,7 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    x(function(err, result1) {
+    x(function(err, __async_result_1) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -19,10 +19,10 @@ function f(callback) {
                 throw err
             }
         };
-        result1;
-        setTimeout(while_loop2, 0);
-        function while_loop2() {
-            y(function(err, result3) {
+        __async_result_1;
+        setTimeout(__while_loop_2, 0);
+        function __while_loop_2() {
+            y(function(err, __async_result_3) {
                 if (err) {
                     if (callback) {
                         return callback(err)
@@ -30,8 +30,8 @@ function f(callback) {
                         throw err
                     }
                 };
-                if (result3) {
-                    w(function(err, result4) {
+                if (__async_result_3) {
+                    w(function(err, __async_result_4) {
                         if (err) {
                             if (callback) {
                                 return callback(err)
@@ -39,8 +39,8 @@ function f(callback) {
                                 throw err
                             }
                         };
-                        result4;
-                        z(function(err, result5) {
+                        __async_result_4;
+                        z(function(err, __async_result_5) {
                             if (err) {
                                 if (callback) {
                                     return callback(err)
@@ -48,8 +48,8 @@ function f(callback) {
                                     throw err
                                 }
                             };
-                            result5;
-                            setTimeout(while_loop2, 0);
+                            __async_result_5;
+                            setTimeout(__while_loop_2, 0);
                         });
                     });
                 }
