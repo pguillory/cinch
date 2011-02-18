@@ -11,13 +11,7 @@ function f(callback) {
     function __try_block_1() {
         var main_callback = callback;
         var callback = function(err, result) {
-            if (err) {
-                __catch_block_2(err);
-            }
-             else {
-                main_callback(null, result);
-            }
-        ;
+            ((err ? __catch_block_2 : main_callback))(err, result);
         };
         g(function(err, __async_result_5) {
             if (err) {
