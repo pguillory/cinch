@@ -1,0 +1,24 @@
+exports.test = function(next, assert) {
+    pow(2, 3, function(err, result) {
+        assert.equal(result, 8)
+        next()
+    })
+}
+
+function pow_(base, exponent) {
+    function count_() {
+        return exponent--
+    }
+    function times_(a, b) {
+        return a * b
+    }
+
+    var n = 1
+    while (true) {
+        if (count_() == 0) {
+            break
+        }
+        n = times_(n, base)
+    }
+    return n
+}

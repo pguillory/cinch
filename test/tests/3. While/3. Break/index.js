@@ -18,11 +18,15 @@ function pow(base, exponent, __callback_2) {
     var n = 1;
     __while_loop_3();
     function __while_loop_3() {
-        return count(function(err, __result_5) {
-            if (err) {
-                return __callback_2(err)
-            };
-            if ((__result_5 > 0)) {
+        if (true) {
+            return count(function(err, __result_5) {
+                if (err) {
+                    return __callback_2(err)
+                };
+                if ((__result_5 == 0)) {
+                    return __rest_4();
+                }
+            ;
                 return times(n, base, function(err, __result_6) {
                     if (err) {
                         return __callback_2(err)
@@ -30,12 +34,12 @@ function pow(base, exponent, __callback_2) {
                     n = __result_6;
                     setTimeout(__while_loop_3, 0);
                 });
-            }
-             else {
-                __rest_4();
-            }
-        ;
-        });
+            });
+        }
+         else {
+            __rest_4();
+        }
+    ;
     };
     function __rest_4() {
         return __callback_2(null, n);

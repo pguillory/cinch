@@ -16,30 +16,33 @@ function pow(base, exponent, __callback_2) {
         var i = __result_4;
         __for_loop_3();
         function __for_loop_3() {
-            return less_than(i, exponent, function(err, __result_5) {
+            return less_than(i, exponent, function(err, __result_6) {
                 if (err) {
                     return __callback_2(err)
                 };
-                if (__result_5) {
-                    return multiply(n, base, function(err, __result_6) {
+                if (__result_6) {
+                    return multiply(n, base, function(err, __result_7) {
                         if (err) {
                             return __callback_2(err)
                         };
-                        n = __result_6;
-                        return increment(i, function(err, __result_7) {
+                        n = __result_7;
+                        return increment(i, function(err, __result_8) {
                             if (err) {
                                 return __callback_2(err)
                             };
-                            i = __result_7;
+                            i = __result_8;
                             setTimeout(__for_loop_3, 0);
                         });
                     });
                 }
                  else {
-                    return __callback_2(null, n);
+                    __rest_5();
                 }
             ;
             });
+        };
+        function __rest_5() {
+            return __callback_2(null, n);
         };
     });
 };

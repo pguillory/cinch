@@ -18,11 +18,11 @@ function f(__callback_2) {
         };
         __for_loop_3();
         function __for_loop_3() {
-            return y(function(err, __result_4) {
+            return y(function(err, __result_5) {
                 if (err) {
                     return __callback_2(err)
                 };
-                if (__result_4) {
+                if (__result_5) {
                     w(function(err) {
                         if (err) {
                             return __callback_2(err)
@@ -36,43 +36,46 @@ function f(__callback_2) {
                     });
                 }
                  else {
-                    return __callback_2(null, 5);
+                    __rest_4();
                 }
             ;
             });
         };
+        function __rest_4() {
+            return __callback_2(null, 5);
+        };
     });
 };
 var w_called = false;
-function w(__callback_5) {
-    __callback_5 = (__callback_5 || __throw_1);
-    w_called = true;
-    return __callback_5(null);
-};
-var x_called = false;
-function x(__callback_6) {
+function w(__callback_6) {
     __callback_6 = (__callback_6 || __throw_1);
-    x_called = true;
+    w_called = true;
     return __callback_6(null);
 };
-var y_called = false;
-function y(__callback_7) {
+var x_called = false;
+function x(__callback_7) {
     __callback_7 = (__callback_7 || __throw_1);
+    x_called = true;
+    return __callback_7(null);
+};
+var y_called = false;
+function y(__callback_8) {
+    __callback_8 = (__callback_8 || __throw_1);
     if (y_called) {
-        return __callback_7(null, false);
+        return __callback_8(null, false);
     }
      else {
         y_called = true;
-        return __callback_7(null, true);
+        return __callback_8(null, true);
     }
 ;
-    return __callback_7(null);
+    return __callback_8(null);
 };
 var z_called = false;
-function z(__callback_8) {
-    __callback_8 = (__callback_8 || __throw_1);
+function z(__callback_9) {
+    __callback_9 = (__callback_9 || __throw_1);
     z_called = true;
-    return __callback_8(null);
+    return __callback_9(null);
 };
 function __throw_1(err) {
     if (err) {
