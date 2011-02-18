@@ -15,7 +15,7 @@ function f(callback) {
     function __try_block_1() {
         var main_callback = callback;
         var callback = function(err, result) {
-            ((err ? __catch_block_2 : main_callback))(err, result);
+            (err ? __catch_block_2 : main_callback)(err, result);
         };
         var err = new Error();
         if (callback) {
