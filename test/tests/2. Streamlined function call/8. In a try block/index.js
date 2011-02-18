@@ -7,43 +7,18 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    return __try_block_1(function(err) {
-        if (err) {
-            __catch_block_2(err, function(err) {
-                if (err) {
-                    if (callback) {
-                        return callback(err)
-                    } else {
-                        throw err
-                    }
-                };
-                __finally_block_3(function(err) {
-                    if (err) {
-                        if (callback) {
-                            return callback(err)
-                        } else {
-                            throw err
-                        }
-                    };
-                    __rest_block_4(callback);
-                });
-            });
-        }
-         else {
-            __finally_block_3(function(err) {
-                if (err) {
-                    if (callback) {
-                        return callback(err)
-                    } else {
-                        throw err
-                    }
-                };
-                __rest_block_4(callback);
-            });
-        }
-    ;
-    });
-    function __try_block_1(callback) {
+    __try_block_1();
+    function __try_block_1() {
+        var main_callback = callback;
+        var callback = function(err, result) {
+            if (err) {
+                __catch_block_2(err);
+            }
+             else {
+                main_callback(null, result);
+            }
+        ;
+        };
         g(function(err, __async_result_5) {
             if (err) {
                 if (callback) {
@@ -53,14 +28,10 @@ function f(callback) {
                 }
             };
             __async_result_5;
-            if (callback) {
-                return callback(null)
-            } else {
-                return
-            };
+            __finally_block_3();
         });
     };
-    function __catch_block_2(err, callback) {
+    function __catch_block_2(err) {
         {
             var err = err;
             if (callback) {
@@ -70,21 +41,12 @@ function f(callback) {
             };
         };
     };
-    function __finally_block_3(callback) {
-        if (callback) {
-            return callback(null)
-        } else {
-            return
-        };
+    function __finally_block_3() {
+        __rest_block_4();
     };
-    function __rest_block_4(callback) {
+    function __rest_block_4() {
         if (callback) {
             return callback(null, 5)
-        } else {
-            return
-        };
-        if (callback) {
-            return callback(null)
         } else {
             return
         };
