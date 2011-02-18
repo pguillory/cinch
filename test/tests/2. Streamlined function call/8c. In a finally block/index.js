@@ -44,17 +44,21 @@ function f(callback) {
     ;
     });
     function try_block(callback) {
-        {
-            var err = new Error();
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            };
+        if (callback) {
+            return callback(null)
+        } else {
+            return
         };
     };
     function catch_block(err, callback) {
-        g(function(err, result15) {
+        if (callback) {
+            return callback(null)
+        } else {
+            return
+        };
+    };
+    function finally_block(callback) {
+        g(function(err, result16) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -62,20 +66,13 @@ function f(callback) {
                     throw err
                 }
             };
-            result15;
+            result16;
             if (callback) {
                 return callback(null)
             } else {
                 return
             };
         });
-    };
-    function finally_block(callback) {
-        if (callback) {
-            return callback(null)
-        } else {
-            return
-        };
     };
     function rest_block(callback) {
         if (callback) {

@@ -17,11 +17,29 @@ function f(callback) {
                         throw err
                     }
                 };
-                rest_block(callback);
+                finally_block(function(err) {
+                    if (err) {
+                        if (callback) {
+                            return callback(err)
+                        } else {
+                            throw err
+                        }
+                    };
+                    rest_block(callback);
+                });
             });
         }
          else {
-            rest_block(callback);
+            finally_block(function(err) {
+                if (err) {
+                    if (callback) {
+                        return callback(err)
+                    } else {
+                        throw err
+                    }
+                };
+                rest_block(callback);
+            });
         }
     ;
     });
@@ -50,6 +68,13 @@ function f(callback) {
             } else {
                 throw err
             };
+        };
+    };
+    function finally_block(callback) {
+        if (callback) {
+            return callback(null)
+        } else {
+            return
         };
     };
     function rest_block(callback) {

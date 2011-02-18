@@ -7,6 +7,7 @@ Streamline.registerExtension()
 
 var tests = {}
 
+console.log('\n*** Compiling tests ***\n')
 fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
     console.log('Chapter: ' + chapter)
     fs.readdirSync(path.join(__dirname, 'tests', chapter)).forEach(function(test_name) {
@@ -18,7 +19,7 @@ fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
     })
 })
 
-console.log('*** Running tests. ***');
+console.log('\n*** Running tests. ***\n');
 ;(function next() {
     for (var name in tests) {
         var test = tests[name];

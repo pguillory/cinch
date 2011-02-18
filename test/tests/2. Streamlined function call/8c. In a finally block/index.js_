@@ -8,8 +8,8 @@ exports.test = function(next, assert) {
 
 function f_() {
     try {
-        throw new Error()
     } catch (err) {
+    } finally {
         g_()
     }
     return 5
