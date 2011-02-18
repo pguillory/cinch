@@ -5,18 +5,18 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function f(callback) {
-    callback = (callback || __throw_1);
-    g(function(err, __result_2) {
+function f(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    g(function(err, __result_3) {
         if (err) {
-            return callback(err)
+            return __callback_2(err)
         };
-        return callback(null, (__result_2 + 1));
+        return __callback_2(null, (__result_3 + 1));
     });
 };
-function g(callback) {
-    callback = (callback || __throw_1);
-    return callback(null, 5);
+function g(__callback_4) {
+    __callback_4 = (__callback_4 || __throw_1);
+    return __callback_4(null, 5);
 };
 function __throw_1(err) {
     if (err) {

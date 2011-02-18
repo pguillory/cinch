@@ -6,37 +6,37 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function f(callback) {
-    callback = (callback || __throw_1);
-    __try_block_2();
-    function __try_block_2() {
-        var main_callback = callback;
-        var callback = function(err, result) {
-            (err ? __catch_block_3 : main_callback)(err, result);
+function f(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    __try_block_3();
+    function __try_block_3() {
+        var main_callback = __callback_2;
+        var __callback_2 = function(err, result) {
+            (err ? __catch_block_4 : main_callback)(err, result);
         };
-        __finally_block_4();
+        __finally_block_5();
     };
-    function __catch_block_3(err) {
-        __finally_block_4();
+    function __catch_block_4(err) {
+        __finally_block_5();
     };
-    function __finally_block_4() {
-        g(function(err, __result_6) {
+    function __finally_block_5() {
+        g(function(err, __result_7) {
             if (err) {
-                return callback(err)
+                return __callback_2(err)
             };
-            __result_6;
-            __rest_block_5();
+            __result_7;
+            __rest_block_6();
         });
     };
-    function __rest_block_5() {
-        return callback(null, 5);
+    function __rest_block_6() {
+        return __callback_2(null, 5);
     };
 };
 var g_called = false;
-function g(callback) {
-    callback = (callback || __throw_1);
+function g(__callback_8) {
+    __callback_8 = (__callback_8 || __throw_1);
     g_called = true;
-    return callback(null);
+    return __callback_8(null);
 };
 function __throw_1(err) {
     if (err) {

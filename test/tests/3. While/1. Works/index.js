@@ -5,25 +5,25 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function pow(base, exponent, callback) {
-    callback = (callback || __throw_1);
-    function g(callback) {
-        callback = (callback || __throw_1);
-        return callback(null, exponent--);
+function pow(base, exponent, __callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    function g(__callback_5) {
+        __callback_5 = (__callback_5 || __throw_1);
+        return __callback_5(null, exponent--);
     };
     var n = 1;
-    setTimeout(__while_loop_2, 0);
-    function __while_loop_2() {
-        g(function(err, __result_3) {
+    setTimeout(__while_loop_3, 0);
+    function __while_loop_3() {
+        g(function(err, __result_4) {
             if (err) {
-                return callback(err)
+                return __callback_2(err)
             };
-            if ((__result_3 > 0)) {
+            if ((__result_4 > 0)) {
                 n *= base;
-                setTimeout(__while_loop_2, 0);
+                setTimeout(__while_loop_3, 0);
             }
              else {
-                return callback(null, n);
+                return __callback_2(null, n);
             }
         ;
         });

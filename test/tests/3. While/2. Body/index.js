@@ -5,34 +5,34 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function pow(base, exponent, callback) {
-    callback = (callback || __throw_1);
-    function count(callback) {
-        callback = (callback || __throw_1);
-        return callback(null, exponent--);
+function pow(base, exponent, __callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    function count(__callback_6) {
+        __callback_6 = (__callback_6 || __throw_1);
+        return __callback_6(null, exponent--);
     };
-    function times(a, b, callback) {
-        callback = (callback || __throw_1);
-        return callback(null, (a * b));
+    function times(a, b, __callback_7) {
+        __callback_7 = (__callback_7 || __throw_1);
+        return __callback_7(null, (a * b));
     };
     var n = 1;
-    setTimeout(__while_loop_2, 0);
-    function __while_loop_2() {
-        count(function(err, __result_3) {
+    setTimeout(__while_loop_3, 0);
+    function __while_loop_3() {
+        count(function(err, __result_4) {
             if (err) {
-                return callback(err)
+                return __callback_2(err)
             };
-            if ((__result_3 > 0)) {
-                times(n, base, function(err, __result_4) {
+            if ((__result_4 > 0)) {
+                times(n, base, function(err, __result_5) {
                     if (err) {
-                        return callback(err)
+                        return __callback_2(err)
                     };
-                    n = __result_4;
-                    setTimeout(__while_loop_2, 0);
+                    n = __result_5;
+                    setTimeout(__while_loop_3, 0);
                 });
             }
              else {
-                return callback(null, n);
+                return __callback_2(null, n);
             }
         ;
         });

@@ -8,22 +8,22 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function fileLength(path, callback) {
-    callback = (callback || __throw_1);
-    fs.stat(path, function(err, __result_2) {
+function fileLength(path, __callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    fs.stat(path, function(err, __result_3) {
         if (err) {
-            return callback(err)
+            return __callback_2(err)
         };
-        if (__result_2.isFile()) {
-            fs.readFile(path, function(err, __result_3) {
+        if (__result_3.isFile()) {
+            fs.readFile(path, function(err, __result_4) {
                 if (err) {
-                    return callback(err)
+                    return __callback_2(err)
                 };
-                return callback(null, __result_3.length);
+                return __callback_2(null, __result_4.length);
             });
         }
          else {
-            return callback(new Error((path + " is not a file")));
+            return __callback_2(new Error((path + " is not a file")));
         }
     ;
     });

@@ -10,14 +10,14 @@ exports.test = function(next, assert) {
         });
     });
 };
-function f(crash, callback) {
-    callback = (callback || __throw_1);
+function f(crash, __callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
     try {
-        __retval_2 = (g(crash) + 1);
+        __retval_3 = (g(crash) + 1);
     } catch (err) {
-        return callback(err);
+        return __callback_2(err);
     };
-    return callback(null, __retval_2);
+    return __callback_2(null, __retval_3);
 };
 function g(crash) {
     if (crash) {

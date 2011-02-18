@@ -4,9 +4,9 @@ exports.test = function(next, assert) {
         next();
     });
 };
-var f = function(callback) {
-    callback = (callback || __throw_1);
-    return callback(null);
+var f = function(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    return __callback_2(null);
 };
 function __throw_1(err) {
     if (err) {

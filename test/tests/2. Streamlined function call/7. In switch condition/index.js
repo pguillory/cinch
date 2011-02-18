@@ -5,23 +5,23 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function f(callback) {
-    callback = (callback || __throw_1);
-    g(function(err, __result_2) {
+function f(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    g(function(err, __result_3) {
         if (err) {
-            return callback(err)
+            return __callback_2(err)
         };
-        switch (__result_2) {
+        switch (__result_3) {
           case 5:
-            return callback(null, 6);
+            return __callback_2(null, 6);
           default:
-            return callback(null, 7);
+            return __callback_2(null, 7);
         };
     });
 };
-function g(callback) {
-    callback = (callback || __throw_1);
-    return callback(null, 5);
+function g(__callback_4) {
+    __callback_4 = (__callback_4 || __throw_1);
+    return __callback_4(null, 5);
 };
 function __throw_1(err) {
     if (err) {

@@ -6,10 +6,10 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function f(callback) {
-    callback = (callback || __throw_1);
-    return callback(new Error());
-    return callback(null);
+function f(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
+    return __callback_2(new Error());
+    return __callback_2(null);
 };
 function __throw_1(err) {
     if (err) {

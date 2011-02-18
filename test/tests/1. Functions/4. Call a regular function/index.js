@@ -5,10 +5,10 @@ exports.test = function(next, assert) {
         next();
     });
 };
-function f(callback) {
-    callback = (callback || __throw_1);
+function f(__callback_2) {
+    __callback_2 = (__callback_2 || __throw_1);
     g();
-    return callback(null);
+    return __callback_2(null);
 };
 var g_called = false;
 function g() {
