@@ -27,6 +27,7 @@ function f(__callback_2) {
     };
     function __rest_block_6() {
         return __callback_2(null, 5);
+        return __callback_2(null);
     };
 };
 var g_called = false;

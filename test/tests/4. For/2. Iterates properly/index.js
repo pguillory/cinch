@@ -37,6 +37,7 @@ function pow(base, exponent, __callback_2) {
                 }
                  else {
                     return __callback_2(null, n);
+                    return __callback_2(null);
                 }
             ;
             });

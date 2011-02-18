@@ -37,6 +37,7 @@ function f(__callback_2) {
                 }
                  else {
                     return __callback_2(null, 5);
+                    return __callback_2(null);
                 }
             ;
             });
@@ -66,6 +67,7 @@ function y(__callback_7) {
         return __callback_7(null, true);
     }
 ;
+    return __callback_7(null);
 };
 var z_called = false;
 function z(__callback_8) {

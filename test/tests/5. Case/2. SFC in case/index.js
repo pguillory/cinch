@@ -10,24 +10,41 @@ function f(__callback_2) {
     console.log("5.2. f_()");
     switch ("foo") {
       case "bar":
-        console.log("5.2. case bar");
-        break;
+        return __case_3();
       case "foo":
+        return __case_4();
+      default:
+        return __case_5();
+    };
+    __rest_6();
+    function __case_3() {
+        console.log("5.2. case bar");
+        return __callback_2(null, __rest_6());
+        __case_4();
+    };
+    function __case_4() {
         console.log("5.2. case foo");
-        return g(function(err, __result_3) {
+        return g(function(err, __result_7) {
             if (err) {
                 return __callback_2(err)
             };
-            return __callback_2(null, __result_3);
+            return __callback_2(null, __result_7);
+            __case_5();
         });
-      default:
+    };
+    function __case_5() {
         console.log("5.2. default");
         return __callback_2(null, 7);
+        __rest_6();
+    };
+    function __rest_6() {
+        return __callback_2(null);
     };
 };
-function g(__callback_4) {
-    __callback_4 = (__callback_4 || __throw_1);
+function g(__callback_8) {
+    __callback_8 = (__callback_8 || __throw_1);
     console.log("5.2. g_()");
-    return __callback_4(null, 5);
+    return __callback_8(null, 5);
+    return __callback_8(null);
 };
 function __throw_1(err) {if (err) {throw err}};

@@ -10,6 +10,7 @@ function pow(base, exponent, __callback_2) {
     function g(__callback_5) {
         __callback_5 = (__callback_5 || __throw_1);
         return __callback_5(null, exponent--);
+        return __callback_5(null);
     };
     var n = 1;
     __while_loop_3();
@@ -24,6 +25,7 @@ function pow(base, exponent, __callback_2) {
             }
              else {
                 return __callback_2(null, n);
+                return __callback_2(null);
             }
         ;
         });
