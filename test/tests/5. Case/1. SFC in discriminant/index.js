@@ -14,8 +14,10 @@ function f(__callback_2) {
         switch (__result_3) {
           case 5:
             return __callback_2(null, 6);
+            break;
           default:
             return __callback_2(null, 7);
+            break;
         };
     });
 };

@@ -1,0 +1,23 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(result, 5)
+        next()
+    })
+}
+
+function f_() {
+    console.log('5.2. f_()')
+    switch ('foo') {
+        case 'foo':
+            console.log('5.2. case 1')
+            return g_()
+        default:
+            console.log('5.2. default')
+            return 7
+    }
+}
+
+function g_() {
+    console.log('5.2. g_()')
+    return 5
+}
