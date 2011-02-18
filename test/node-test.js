@@ -25,7 +25,9 @@ console.log('\n*** Running tests. ***\n');
         var test = tests[name];
         delete tests[name];
         console.log(name);
-        return test(next, assert);
+        return test(function() {
+            process.nextTick(next)
+        }, assert);
     }
     console.log('\n*** All tests passed. ***\n');
 })();
