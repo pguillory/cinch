@@ -49,8 +49,6 @@ Example
 
 Known issues
 ------------
-* Irregular `switch` statements (with `case` clauses that flow into each other) are not handled by
-the transformation engine.
 * Labelled `break` and `continue` are not yet supported.
 
 Discussion
