@@ -21,9 +21,9 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    setTimeout(while_loop19, 0);
-    function while_loop19() {
-        count(function(err, result20) {
+    setTimeout(while_loop1, 0);
+    function while_loop1() {
+        count(function(err, result2) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -31,8 +31,8 @@ function pow(base, exponent, callback) {
                     throw err
                 }
             };
-            if ((result20 > 0)) {
-                times(n, base, function(err, result21) {
+            if ((result2 > 0)) {
+                times(n, base, function(err, result3) {
                     if (err) {
                         if (callback) {
                             return callback(err)
@@ -40,8 +40,8 @@ function pow(base, exponent, callback) {
                             throw err
                         }
                     };
-                    n = result21;
-                    setTimeout(while_loop19, 0);
+                    n = result3;
+                    setTimeout(while_loop1, 0);
                 });
             }
              else {

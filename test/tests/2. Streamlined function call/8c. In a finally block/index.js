@@ -58,7 +58,7 @@ function f(callback) {
         };
     };
     function finally_block(callback) {
-        g(function(err, result16) {
+        g(function(err, result1) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -66,7 +66,7 @@ function f(callback) {
                     throw err
                 }
             };
-            result16;
+            result1;
             if (callback) {
                 return callback(null)
             } else {

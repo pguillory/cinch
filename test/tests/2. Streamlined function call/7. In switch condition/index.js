@@ -6,7 +6,7 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    g(function(err, result13) {
+    g(function(err, result1) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -14,7 +14,7 @@ function f(callback) {
                 throw err
             }
         };
-        switch (result13) {
+        switch (result1) {
           case 5:
             if (callback) {
                 return callback(null, 6)

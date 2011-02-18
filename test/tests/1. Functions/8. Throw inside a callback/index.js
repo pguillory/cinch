@@ -12,7 +12,7 @@ exports.test = function(next, assert) {
 };
 function f(crash, callback) {
     try {
-        result5 = (g(crash) + 1);
+        result1 = (g(crash) + 1);
     } catch (err) {
         if (callback) {
             return callback(err)
@@ -21,7 +21,7 @@ function f(crash, callback) {
         };
     };
     if (callback) {
-        return callback(null, result5)
+        return callback(null, result1)
     } else {
         return
     };

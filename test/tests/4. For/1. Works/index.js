@@ -11,7 +11,7 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    x(function(err, result22) {
+    x(function(err, result1) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -19,10 +19,10 @@ function f(callback) {
                 throw err
             }
         };
-        result22;
-        setTimeout(while_loop23, 0);
-        function while_loop23() {
-            y(function(err, result24) {
+        result1;
+        setTimeout(while_loop2, 0);
+        function while_loop2() {
+            y(function(err, result3) {
                 if (err) {
                     if (callback) {
                         return callback(err)
@@ -30,8 +30,8 @@ function f(callback) {
                         throw err
                     }
                 };
-                if (result24) {
-                    w(function(err, result25) {
+                if (result3) {
+                    w(function(err, result4) {
                         if (err) {
                             if (callback) {
                                 return callback(err)
@@ -39,8 +39,8 @@ function f(callback) {
                                 throw err
                             }
                         };
-                        result25;
-                        z(function(err, result26) {
+                        result4;
+                        z(function(err, result5) {
                             if (err) {
                                 if (callback) {
                                     return callback(err)
@@ -48,8 +48,8 @@ function f(callback) {
                                     throw err
                                 }
                             };
-                            result26;
-                            setTimeout(while_loop23, 0);
+                            result5;
+                            setTimeout(while_loop2, 0);
                         });
                     });
                 }

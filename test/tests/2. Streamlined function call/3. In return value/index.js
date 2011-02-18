@@ -6,7 +6,7 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    g(function(err, result8) {
+    g(function(err, result1) {
         if (err) {
             if (callback) {
                 return callback(err)
@@ -15,7 +15,7 @@ function f(callback) {
             }
         };
         if (callback) {
-            return callback(null, (result8 + 1))
+            return callback(null, (result1 + 1))
         } else {
             return
         };
