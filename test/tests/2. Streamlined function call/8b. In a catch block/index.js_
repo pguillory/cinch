@@ -8,7 +8,7 @@ exports.test = function(next, assert) {
 
 function f_() {
     try {
-        throw err
+        throw new Error()
     } catch (err) {
         g_()
     }
@@ -19,3 +19,30 @@ var g_called = false
 function g_() {
     g_called = true
 }
+
+/*
+function f_template(callback) {
+    return try_block(function(err) {
+        if (err) {
+            catch_block(err, function(err) {
+                if (err) return callback(err)
+                rest_block(callback)
+            })
+        } else {
+            rest_block(callback)
+        }
+    })
+    function try_block_() {
+        console.log('try')
+        throw new Error()
+    }
+    function catch_block_(err) {
+        console.log('catch')
+        g_()
+    }
+    function rest_block_() {
+        console.log('rest')
+        return 5
+    }
+}
+*/

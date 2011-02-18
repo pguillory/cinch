@@ -1,23 +1,19 @@
 var path = require('path')
 var fs = require('fs')
-var a = {
-    b: {
-        fs: fs
-    }
-}
 
 exports.test = function(next, assert) {
-    fileLength(path.join(__dirname, 'test.txt'), function(err, result) {
+    var filename = path.join(__dirname, 'test.txt')
+
+    fileLength(filename, function(err, result) {
         assert.equal(result, 5)
         next()
     })
 }
 
 function fileLength_(path) {
-  if (fs.stat_(path).isFile()) {
-    return fs.readFile_(path).length;
-  } else {
-    throw new Error(path + " is not a file");
-    a = b
-  }
+    if (fs.stat_(path).isFile()) {
+        return fs.readFile_(path).length;
+    } else {
+        throw new Error(path + " is not a file");
+    }
 }

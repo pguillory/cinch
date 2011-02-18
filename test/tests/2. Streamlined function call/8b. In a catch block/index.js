@@ -7,16 +7,35 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    try {
+    return try_block(function(err) {
+        if (err) {
+            catch_block(err, function(err) {
+                if (err) {
+                    if (callback) {
+                        return callback(err)
+                    } else {
+                        throw err
+                    }
+                };
+                rest_block(callback);
+            });
+        }
+         else {
+            rest_block(callback);
+        }
+    ;
+    });
+    function try_block(callback) {
         {
-            var err = err;
+            var err = new Error();
             if (callback) {
                 return callback(err)
             } else {
                 throw err
             };
         };
-    } catch (err) {
+    };
+    function catch_block(err, callback) {
         g(function(err, result15) {
             if (err) {
                 if (callback) {
@@ -26,12 +45,24 @@ function f(callback) {
                 }
             };
             result15;
+            if (callback) {
+                return callback(null)
+            } else {
+                return
+            };
         });
     };
-    if (callback) {
-        return callback(null, 5)
-    } else {
-        return
+    function rest_block(callback) {
+        if (callback) {
+            return callback(null, 5)
+        } else {
+            return
+        };
+        if (callback) {
+            return callback(null)
+        } else {
+            return
+        };
     };
 };
 var g_called = false;
