@@ -14,6 +14,6 @@ function f_() {
     }
 }
 
-function g_() {
-    return 5
+function g(callback) {
+    return callback(null, 5)
 }
