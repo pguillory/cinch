@@ -47,6 +47,21 @@ function sum(values, __callback_2) {
         return __callback_2(null, total);
     };
 };
+<<<<<<< HEAD
+=======
+function sum_model(values, callback) {
+    var total = 0;
+    var _props = [];
+    for (i in values) {
+        _props.push(i);
+    };
+    for (var _i = 0; (_i < _props.length); _i++) {
+        i = _props[_i];
+        total = plus_(total, values[i]);
+    };
+    return total;
+};
+>>>>>>> 608633a6db3a1d509a2986226b42dff37eef2628
 function plus(a, b, callback) {
     return callback(null, (a + b));
 };
