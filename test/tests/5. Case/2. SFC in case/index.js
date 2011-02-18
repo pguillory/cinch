@@ -9,19 +9,20 @@ function f(__callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
     console.log("5.2. f_()");
     switch ("foo") {
+      case "bar":
+        console.log("5.2. case bar");
+        break;
       case "foo":
-        console.log("5.2. case 1");
-        g(function(err, __result_3) {
+        console.log("5.2. case foo");
+        return g(function(err, __result_3) {
             if (err) {
                 return __callback_2(err)
             };
             return __callback_2(null, __result_3);
         });
-        break;
       default:
         console.log("5.2. default");
         return __callback_2(null, 7);
-        break;
     };
 };
 function g(__callback_4) {

@@ -10,12 +10,12 @@ exports.test = function(next, assert) {
 };
 function fileLength(path, __callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    fs.stat(path, function(err, __result_3) {
+    return fs.stat(path, function(err, __result_3) {
         if (err) {
             return __callback_2(err)
         };
         if (__result_3.isFile()) {
-            fs.readFile(path, function(err, __result_4) {
+            return fs.readFile(path, function(err, __result_4) {
                 if (err) {
                     return __callback_2(err)
                 };

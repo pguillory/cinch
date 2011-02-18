@@ -7,11 +7,11 @@ exports.test = function(next, assert) {
 };
 function sum_squares(a, b, __callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    square(a, function(err, __result_3) {
+    return square(a, function(err, __result_3) {
         if (err) {
             return __callback_2(err)
         };
-        square(b, function(err, __result_4) {
+        return square(b, function(err, __result_4) {
             if (err) {
                 return __callback_2(err)
             };

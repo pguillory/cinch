@@ -8,7 +8,7 @@ exports.test = function(next, assert) {
 };
 function f(__callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    g(function(err, __result_3) {
+    return g(function(err, __result_3) {
         if (err) {
             return __callback_2(err)
         };

@@ -18,7 +18,7 @@ function f(__callback_2) {
         };
         __while_loop_3();
         function __while_loop_3() {
-            y(function(err, __result_4) {
+            return y(function(err, __result_4) {
                 if (err) {
                     return __callback_2(err)
                 };

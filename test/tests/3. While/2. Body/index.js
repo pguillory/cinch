@@ -18,12 +18,12 @@ function pow(base, exponent, __callback_2) {
     var n = 1;
     __while_loop_3();
     function __while_loop_3() {
-        count(function(err, __result_4) {
+        return count(function(err, __result_4) {
             if (err) {
                 return __callback_2(err)
             };
             if ((__result_4 > 0)) {
-                times(n, base, function(err, __result_5) {
+                return times(n, base, function(err, __result_5) {
                     if (err) {
                         return __callback_2(err)
                     };

@@ -14,7 +14,7 @@ function pow(base, exponent, __callback_2) {
     var n = 1;
     __while_loop_3();
     function __while_loop_3() {
-        g(function(err, __result_4) {
+        return g(function(err, __result_4) {
             if (err) {
                 return __callback_2(err)
             };
