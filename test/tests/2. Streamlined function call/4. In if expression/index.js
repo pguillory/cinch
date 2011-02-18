@@ -12,15 +12,23 @@ function f(__callback_2) {
             return __callback_2(err)
         };
         if ((__result_3 === 5)) {
-            return __callback_2(null, 6);
+            __then_block_4();
+        }
+         else {
+            __rest_block_5();
         }
     ;
-        return __callback_2(null);
+        function __then_block_4() {
+            return __callback_2(null, 6);
+        };
+        function __rest_block_5() {
+            return __callback_2(null);
+        };
     });
 };
-function g(__callback_4) {
-    __callback_4 = (__callback_4 || __throw_1);
-    return __callback_4(null, 5);
+function g(__callback_6) {
+    __callback_6 = (__callback_6 || __throw_1);
+    return __callback_6(null, 5);
 };
 function __throw_1(err) {
     if (err) {

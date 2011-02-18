@@ -21,24 +21,35 @@ function pow(base, exponent, __callback_2) {
                     return __callback_2(err)
                 };
                 if (__result_6) {
-                    return multiply(n, base, function(err, __result_7) {
+                    __then_block_7();
+                }
+                 else {
+                    __else_block_8();
+                }
+            ;
+                function __then_block_7() {
+                    return multiply(n, base, function(err, __result_10) {
                         if (err) {
                             return __callback_2(err)
                         };
-                        n = __result_7;
-                        return increment(i, function(err, __result_8) {
+                        n = __result_10;
+                        return increment(i, function(err, __result_11) {
                             if (err) {
                                 return __callback_2(err)
                             };
-                            i = __result_8;
+                            i = __result_11;
                             setTimeout(__for_loop_3, 0);
+                            __rest_block_9();
                         });
                     });
-                }
-                 else {
+                };
+                function __else_block_8() {
                     __rest_5();
-                }
-            ;
+                    __rest_block_9();
+                };
+                function __rest_block_9() {
+                
+                };
             });
         };
         function __rest_5() {

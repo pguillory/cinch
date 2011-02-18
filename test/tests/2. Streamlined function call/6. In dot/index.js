@@ -15,18 +15,26 @@ function fileLength(path, __callback_2) {
             return __callback_2(err)
         };
         if (__result_3.isFile()) {
-            return fs.readFile(path, function(err, __result_4) {
+            __then_block_4();
+        }
+         else {
+            __else_block_5();
+        }
+    ;
+        function __then_block_4() {
+            return fs.readFile(path, function(err, __result_7) {
                 if (err) {
                     return __callback_2(err)
                 };
-                return __callback_2(null, __result_4.length);
+                return __callback_2(null, __result_7.length);
             });
-        }
-         else {
+        };
+        function __else_block_5() {
             return __callback_2(new Error((path + " is not a file")));
-        }
-    ;
-        return __callback_2(null);
+        };
+        function __rest_block_6() {
+            return __callback_2(null);
+        };
     });
 };
 function __throw_1(err) {
