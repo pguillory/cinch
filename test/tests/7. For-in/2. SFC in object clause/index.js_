@@ -1,0 +1,26 @@
+var util = require('util')
+
+exports.test = function(next, assert) {
+    factorial(4, function(err, result) {
+        assert.is_null(err)
+        assert.equal(result, 24)
+        next()
+    })
+}
+
+function factorial_(n) {
+    var m = 1
+    var values
+    for (var i in (values = range_(1, n))) {
+        m *= values[i]
+    }
+    return m
+}
+
+function range(min, max, callback) {
+    var numbers = []
+    for (var i = min; i <= max; i++) {
+        numbers.push(i)
+    }
+    return callback(null, numbers)
+}

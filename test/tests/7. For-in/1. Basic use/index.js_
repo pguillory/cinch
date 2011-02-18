@@ -19,11 +19,11 @@ function sum_(values) {
 function sum_model(values, callback) {
     var total = 0
     var _props = []
-    for (i in values) {
+    for (i in values_()) {
         _props.push(i)
     }
     for (var _i = 0; _i < _props.length; _i++) {
-        i = _props[_i]
+        i = values[_props[_i]]
         total = plus_(total, values[i])
     }
     return total
