@@ -16,7 +16,6 @@ function f(__callback_2) {
             (err ? __catch_block_4 : __main_callback_7)(err, result);
         };
         return __callback_2(new Error());
-        __rest_block_6();
     };
     function __catch_block_4(err) {
         g(function(err) {

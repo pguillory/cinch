@@ -23,7 +23,6 @@ function f(__callback_2) {
     };
     function __catch_block_4(err) {
         return __callback_2(err);
-        __rest_block_6();
     };
     function __rest_block_6() {
         return __callback_2(null, 5);

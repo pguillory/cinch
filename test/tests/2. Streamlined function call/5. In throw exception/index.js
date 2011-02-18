@@ -12,7 +12,6 @@ function f(__callback_2) {
             return __callback_2(err)
         };
         return __callback_2((__result_3 + 1));
-        return __callback_2(null);
     });
 };
 function g(__callback_4) {
