@@ -12,7 +12,7 @@ function pow(base, exponent, __callback_2) {
         return __callback_5(null, exponent--);
     };
     var n = 1;
-    setTimeout(__while_loop_3, 0);
+    __while_loop_3();
     function __while_loop_3() {
         g(function(err, __result_4) {
             if (err) {
@@ -29,9 +29,4 @@ function pow(base, exponent, __callback_2) {
         });
     };
 };
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
-};
+function __throw_1(err) {if (err) {throw err}};

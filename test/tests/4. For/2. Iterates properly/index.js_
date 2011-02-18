@@ -1,0 +1,31 @@
+exports.test = function(next, assert) {
+    pow(2, 3, function(err, result) {
+        assert.is_null(err)
+        assert.equal(result, 8)
+        next()
+    })
+}
+
+function pow_(base, exponent) {
+    var n = 1
+    for (var i = zero_(); less_than_(i, exponent); i = increment_(i)) {
+        n = multiply_(n, base)
+    }
+    return n
+}
+
+function zero(callback) {
+    return callback(null, 0)
+}
+
+function less_than(i, exponent, callback) {
+    return callback(null, i < exponent)
+}
+
+function increment(i, callback) {
+    return callback(null, i + 1)
+}
+
+function multiply(a, b, callback) {
+    return callback(null, a * b)
+}

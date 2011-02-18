@@ -16,7 +16,7 @@ function f(__callback_2) {
         if (err) {
             return __callback_2(err)
         };
-        setTimeout(__while_loop_3, 0);
+        __while_loop_3();
         function __while_loop_3() {
             y(function(err, __result_4) {
                 if (err) {
@@ -73,9 +73,4 @@ function z(__callback_8) {
     z_called = true;
     return __callback_8(null);
 };
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
-};
+function __throw_1(err) {if (err) {throw err}};

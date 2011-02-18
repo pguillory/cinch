@@ -18,9 +18,4 @@ function f(__callback_2) {
 function g(callback) {
     return callback(null, 5);
 };
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
-};
+function __throw_1(err) {if (err) {throw err}};
