@@ -1,0 +1,35 @@
+exports.test = function(next, assert) {
+    sum([3, 4, 5], function(err, result) {
+        assert.is_null(err)
+        assert.equal(result, 12)
+        next()
+    })
+}
+
+function sum_(values) {
+    var total = 0
+    for (var i in values) {
+        total = plus_(total, values[i])
+    }
+    return total
+}
+
+/*
+// Intermediate transformation:
+function sum_model(values, callback) {
+    var total = 0
+    var _props = []
+    for (i in values) {
+        _props.push(i)
+    }
+    for (var _i = 0; _i < _props.length; _i++) {
+        i = _props[_i]
+        total = plus_(total, values[i])
+    }
+    return total
+}
+*/
+
+function plus(a, b, callback) {
+    return callback(null, a + b)
+}
