@@ -11,20 +11,13 @@ exports.test = function(next, assert) {
     });
 };
 function f(crash, callback) {
+    callback = (callback || __throw_1);
     try {
-        __retval_1 = (g(crash) + 1);
+        __retval_2 = (g(crash) + 1);
     } catch (err) {
-        if (callback) {
-            return callback(err)
-        } else {
-            throw err
-        };
+        return callback(err);
     };
-    if (callback) {
-        return callback(null, __retval_1)
-    } else {
-        return
-    };
+    return callback(null, __retval_2);
 };
 function g(crash) {
     if (crash) {
@@ -32,6 +25,12 @@ function g(crash) {
     }
      else {
         return 1;
+    }
+;
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
     }
 ;
 };

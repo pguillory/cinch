@@ -6,34 +6,26 @@ exports.test = function(next, assert) {
     });
 };
 function sum_squares(a, b, callback) {
-    square(a, function(err, __async_result_1) {
+    callback = (callback || __throw_1);
+    square(a, function(err, __result_2) {
         if (err) {
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            }
+            return callback(err)
         };
-        square(b, function(err, __async_result_2) {
+        square(b, function(err, __result_3) {
             if (err) {
-                if (callback) {
-                    return callback(err)
-                } else {
-                    throw err
-                }
+                return callback(err)
             };
-            if (callback) {
-                return callback(null, (__async_result_1 + __async_result_2))
-            } else {
-                return
-            };
+            return callback(null, (__result_2 + __result_3));
         });
     });
 };
 function square(x, callback) {
-    if (callback) {
-        return callback(null, (x * x))
-    } else {
-        return
-    };
+    callback = (callback || __throw_1);
+    return callback(null, (x * x));
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

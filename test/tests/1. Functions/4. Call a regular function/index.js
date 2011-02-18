@@ -6,14 +6,17 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
+    callback = (callback || __throw_1);
     g();
-    if (callback) {
-        return callback(null)
-    } else {
-        return
-    };
+    return callback(null);
 };
 var g_called = false;
 function g() {
     g_called = true;
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

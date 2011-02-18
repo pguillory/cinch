@@ -6,36 +6,32 @@ exports.test = function(next, assert) {
     });
 };
 function pow(base, exponent, callback) {
+    callback = (callback || __throw_1);
     function g(callback) {
-        if (callback) {
-            return callback(null, exponent--)
-        } else {
-            return
-        };
+        callback = (callback || __throw_1);
+        return callback(null, exponent--);
     };
     var n = 1;
-    setTimeout(__while_loop_1, 0);
-    function __while_loop_1() {
-        g(function(err, __async_result_2) {
+    setTimeout(__while_loop_2, 0);
+    function __while_loop_2() {
+        g(function(err, __result_3) {
             if (err) {
-                if (callback) {
-                    return callback(err)
-                } else {
-                    throw err
-                }
+                return callback(err)
             };
-            if ((__async_result_2 > 0)) {
+            if ((__result_3 > 0)) {
                 n *= base;
-                setTimeout(__while_loop_1, 0);
+                setTimeout(__while_loop_2, 0);
             }
              else {
-                if (callback) {
-                    return callback(null, n)
-                } else {
-                    return
-                };
+                return callback(null, n);
             }
         ;
         });
     };
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

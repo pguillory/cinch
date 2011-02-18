@@ -6,52 +6,41 @@ exports.test = function(next, assert) {
     });
 };
 function pow(base, exponent, callback) {
+    callback = (callback || __throw_1);
     function count(callback) {
-        if (callback) {
-            return callback(null, exponent--)
-        } else {
-            return
-        };
+        callback = (callback || __throw_1);
+        return callback(null, exponent--);
     };
     function times(a, b, callback) {
-        if (callback) {
-            return callback(null, (a * b))
-        } else {
-            return
-        };
+        callback = (callback || __throw_1);
+        return callback(null, (a * b));
     };
     var n = 1;
-    setTimeout(__while_loop_1, 0);
-    function __while_loop_1() {
-        count(function(err, __async_result_2) {
+    setTimeout(__while_loop_2, 0);
+    function __while_loop_2() {
+        count(function(err, __result_3) {
             if (err) {
-                if (callback) {
-                    return callback(err)
-                } else {
-                    throw err
-                }
+                return callback(err)
             };
-            if ((__async_result_2 > 0)) {
-                times(n, base, function(err, __async_result_3) {
+            if ((__result_3 > 0)) {
+                times(n, base, function(err, __result_4) {
                     if (err) {
-                        if (callback) {
-                            return callback(err)
-                        } else {
-                            throw err
-                        }
+                        return callback(err)
                     };
-                    n = __async_result_3;
-                    setTimeout(__while_loop_1, 0);
+                    n = __result_4;
+                    setTimeout(__while_loop_2, 0);
                 });
             }
              else {
-                if (callback) {
-                    return callback(null, n)
-                } else {
-                    return
-                };
+                return callback(null, n);
             }
         ;
         });
     };
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

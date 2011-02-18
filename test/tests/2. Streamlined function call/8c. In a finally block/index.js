@@ -7,44 +7,40 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    __try_block_1();
-    function __try_block_1() {
+    callback = (callback || __throw_1);
+    __try_block_2();
+    function __try_block_2() {
         var main_callback = callback;
         var callback = function(err, result) {
-            (err ? __catch_block_2 : main_callback)(err, result);
+            (err ? __catch_block_3 : main_callback)(err, result);
         };
-        __finally_block_3();
+        __finally_block_4();
     };
-    function __catch_block_2(err) {
-        __finally_block_3();
+    function __catch_block_3(err) {
+        __finally_block_4();
     };
-    function __finally_block_3() {
-        g(function(err, __async_result_5) {
+    function __finally_block_4() {
+        g(function(err, __result_6) {
             if (err) {
-                if (callback) {
-                    return callback(err)
-                } else {
-                    throw err
-                }
+                return callback(err)
             };
-            __async_result_5;
-            __rest_block_4();
+            __result_6;
+            __rest_block_5();
         });
     };
-    function __rest_block_4() {
-        if (callback) {
-            return callback(null, 5)
-        } else {
-            return
-        };
+    function __rest_block_5() {
+        return callback(null, 5);
     };
 };
 var g_called = false;
 function g(callback) {
+    callback = (callback || __throw_1);
     g_called = true;
-    if (callback) {
-        return callback(null)
-    } else {
-        return
-    };
+    return callback(null);
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

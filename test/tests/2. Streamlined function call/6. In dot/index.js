@@ -9,38 +9,28 @@ exports.test = function(next, assert) {
     });
 };
 function fileLength(path, callback) {
-    fs.stat(path, function(err, __async_result_1) {
+    callback = (callback || __throw_1);
+    fs.stat(path, function(err, __result_2) {
         if (err) {
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            }
+            return callback(err)
         };
-        if (__async_result_1.isFile()) {
-            fs.readFile(path, function(err, __async_result_2) {
+        if (__result_2.isFile()) {
+            fs.readFile(path, function(err, __result_3) {
                 if (err) {
-                    if (callback) {
-                        return callback(err)
-                    } else {
-                        throw err
-                    }
+                    return callback(err)
                 };
-                if (callback) {
-                    return callback(null, __async_result_2.length)
-                } else {
-                    return
-                };
+                return callback(null, __result_3.length);
             });
         }
          else {
-            var err = new Error((path + " is not a file"));
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            };
+            return callback(new Error((path + " is not a file")));
         }
     ;
     });
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

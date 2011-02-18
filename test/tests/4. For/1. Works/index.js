@@ -11,54 +11,35 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    x(function(err, __async_result_1) {
+    callback = (callback || __throw_1);
+    x(function(err, __result_2) {
         if (err) {
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            }
+            return callback(err)
         };
-        __async_result_1;
-        setTimeout(__while_loop_2, 0);
-        function __while_loop_2() {
-            y(function(err, __async_result_3) {
+        __result_2;
+        setTimeout(__while_loop_3, 0);
+        function __while_loop_3() {
+            y(function(err, __result_4) {
                 if (err) {
-                    if (callback) {
-                        return callback(err)
-                    } else {
-                        throw err
-                    }
+                    return callback(err)
                 };
-                if (__async_result_3) {
-                    w(function(err, __async_result_4) {
+                if (__result_4) {
+                    w(function(err, __result_5) {
                         if (err) {
-                            if (callback) {
-                                return callback(err)
-                            } else {
-                                throw err
-                            }
+                            return callback(err)
                         };
-                        __async_result_4;
-                        z(function(err, __async_result_5) {
+                        __result_5;
+                        z(function(err, __result_6) {
                             if (err) {
-                                if (callback) {
-                                    return callback(err)
-                                } else {
-                                    throw err
-                                }
+                                return callback(err)
                             };
-                            __async_result_5;
-                            setTimeout(__while_loop_2, 0);
+                            __result_6;
+                            setTimeout(__while_loop_3, 0);
                         });
                     });
                 }
                  else {
-                    if (callback) {
-                        return callback(null, 5)
-                    } else {
-                        return
-                    };
+                    return callback(null, 5);
                 }
             ;
             });
@@ -67,47 +48,37 @@ function f(callback) {
 };
 var w_called = false;
 function w(callback) {
+    callback = (callback || __throw_1);
     w_called = true;
-    if (callback) {
-        return callback(null)
-    } else {
-        return
-    };
+    return callback(null);
 };
 var x_called = false;
 function x(callback) {
+    callback = (callback || __throw_1);
     x_called = true;
-    if (callback) {
-        return callback(null)
-    } else {
-        return
-    };
+    return callback(null);
 };
 var y_called = false;
 function y(callback) {
+    callback = (callback || __throw_1);
     if (y_called) {
-        if (callback) {
-            return callback(null, false)
-        } else {
-            return
-        };
+        return callback(null, false);
     }
      else {
         y_called = true;
-        if (callback) {
-            return callback(null, true)
-        } else {
-            return
-        };
+        return callback(null, true);
     }
 ;
 };
 var z_called = false;
 function z(callback) {
+    callback = (callback || __throw_1);
     z_called = true;
-    if (callback) {
-        return callback(null)
-    } else {
-        return
-    };
+    return callback(null);
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };

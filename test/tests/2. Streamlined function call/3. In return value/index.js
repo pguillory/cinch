@@ -6,25 +6,21 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    g(function(err, __async_result_1) {
+    callback = (callback || __throw_1);
+    g(function(err, __result_2) {
         if (err) {
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            }
+            return callback(err)
         };
-        if (callback) {
-            return callback(null, (__async_result_1 + 1))
-        } else {
-            return
-        };
+        return callback(null, (__result_2 + 1));
     });
 };
 function g(callback) {
-    if (callback) {
-        return callback(null, 5)
-    } else {
-        return
-    };
+    callback = (callback || __throw_1);
+    return callback(null, 5);
+};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
 };
