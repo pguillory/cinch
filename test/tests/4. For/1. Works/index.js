@@ -16,8 +16,8 @@ function f(__callback_2) {
         if (err) {
             return __callback_2(err)
         };
-        __while_loop_3();
-        function __while_loop_3() {
+        __for_loop_3();
+        function __for_loop_3() {
             return y(function(err, __result_4) {
                 if (err) {
                     return __callback_2(err)
@@ -31,7 +31,7 @@ function f(__callback_2) {
                             if (err) {
                                 return __callback_2(err)
                             };
-                            setTimeout(__while_loop_3, 0);
+                            setTimeout(__for_loop_3, 0);
                         });
                     });
                 }

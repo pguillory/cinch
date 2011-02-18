@@ -9,13 +9,13 @@ exports.test = function(next, assert) {
 function pow(base, exponent, __callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
     var n = 1;
-    return zero(function(err, __result_3) {
+    return zero(function(err, __result_4) {
         if (err) {
             return __callback_2(err)
         };
-        var i = __result_3;
-        __while_loop_4();
-        function __while_loop_4() {
+        var i = __result_4;
+        __for_loop_3();
+        function __for_loop_3() {
             return less_than(i, exponent, function(err, __result_5) {
                 if (err) {
                     return __callback_2(err)
@@ -31,7 +31,7 @@ function pow(base, exponent, __callback_2) {
                                 return __callback_2(err)
                             };
                             i = __result_7;
-                            setTimeout(__while_loop_4, 0);
+                            setTimeout(__for_loop_3, 0);
                         });
                     });
                 }

@@ -7,9 +7,9 @@ Streamline.registerExtension()
 
 var tests = {}
 
-console.log('\n*** Compiling tests ***\n')
+console.log('\n*** Compiling tests ***')
 fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
-    console.log('Chapter: ' + chapter)
+    console.log('\nChapter: ' + chapter)
     fs.readdirSync(path.join(__dirname, 'tests', chapter)).forEach(function(test_name) {
         console.log('Test: ' + test_name)
         var test = require(path.join(__dirname, 'tests', chapter, test_name)).test
