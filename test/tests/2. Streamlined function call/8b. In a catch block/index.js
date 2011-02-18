@@ -23,7 +23,7 @@ function f(callback) {
         } else {
             throw err
         };
-        __finally_block_3();
+        __rest_block_4();
     };
     function __catch_block_2(err) {
         g(function(err, __async_result_5) {
@@ -35,11 +35,8 @@ function f(callback) {
                 }
             };
             __async_result_5;
-            __finally_block_3();
+            __rest_block_4();
         });
-    };
-    function __finally_block_3() {
-        __rest_block_4();
     };
     function __rest_block_4() {
         if (callback) {
