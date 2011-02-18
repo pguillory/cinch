@@ -26,14 +26,13 @@ function f(callback) {
         });
     };
     function __catch_block_2(err) {
-        {
-            var err = err;
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            };
+        var err = err;
+        if (callback) {
+            return callback(err)
+        } else {
+            throw err
         };
+        __finally_block_3();
     };
     function __finally_block_3() {
         __rest_block_4();

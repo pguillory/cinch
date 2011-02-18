@@ -17,14 +17,13 @@ function f(callback) {
         var callback = function(err, result) {
             ((err ? __catch_block_2 : main_callback))(err, result);
         };
-        {
-            var err = new Error();
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            };
+        var err = new Error();
+        if (callback) {
+            return callback(err)
+        } else {
+            throw err
         };
+        __finally_block_3();
     };
     function __catch_block_2(err) {
         g(function(err, __async_result_5) {

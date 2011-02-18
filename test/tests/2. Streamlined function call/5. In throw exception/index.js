@@ -14,13 +14,16 @@ function f(callback) {
                 throw err
             }
         };
-        {
-            var err = (__async_result_1 + 1);
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            };
+        var err = (__async_result_1 + 1);
+        if (callback) {
+            return callback(err)
+        } else {
+            throw err
+        };
+        if (callback) {
+            return callback(null)
+        } else {
+            return
         };
     });
 };
