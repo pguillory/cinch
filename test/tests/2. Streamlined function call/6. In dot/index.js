@@ -29,4 +29,9 @@ function fileLength(path, __callback_2) {
         return __callback_2(null);
     });
 };
-function __throw_1(err) {if (err) {throw err}};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
+};

@@ -38,4 +38,9 @@ function pow(base, exponent, __callback_2) {
         });
     };
 };
-function __throw_1(err) {if (err) {throw err}};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
+};

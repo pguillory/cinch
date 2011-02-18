@@ -55,4 +55,9 @@ function increment(i, callback) {
 function multiply(a, b, callback) {
     return callback(null, (a * b));
 };
-function __throw_1(err) {if (err) {throw err}};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
+};

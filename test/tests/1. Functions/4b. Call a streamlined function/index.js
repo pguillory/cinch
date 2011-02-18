@@ -15,4 +15,9 @@ function g(__callback_3) {
     g_called = true;
     return __callback_3(null);
 };
-function __throw_1(err) {if (err) {throw err}};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
+};

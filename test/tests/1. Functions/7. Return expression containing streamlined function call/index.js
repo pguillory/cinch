@@ -23,4 +23,9 @@ function square(x, __callback_5) {
     __callback_5 = (__callback_5 || __throw_1);
     return __callback_5(null, (x * x));
 };
-function __throw_1(err) {if (err) {throw err}};
+function __throw_1(err) {
+    if (err) {
+        throw err;
+    }
+;
+};
