@@ -20,7 +20,7 @@ function f(callback) {
             }
         };
         result22;
-        while_loop23();
+        setTimeout(while_loop23, 0);
         function while_loop23() {
             y(function(err, result24) {
                 if (err) {
@@ -49,62 +49,7 @@ function f(callback) {
                                 }
                             };
                             result26;
-                            while_loop23();
-                        });
-                    });
-                }
-                 else {
-                    if (callback) {
-                        return callback(null, 5)
-                    } else {
-                        return
-                    };
-                }
-            ;
-            });
-        };
-    });
-};
-function f_template(callback) {
-    x(function(err, result27) {
-        if (err) {
-            if (callback) {
-                return callback(err)
-            } else {
-                throw err
-            }
-        };
-        result27;
-        while_loop28();
-        function while_loop28() {
-            y(function(err, result29) {
-                if (err) {
-                    if (callback) {
-                        return callback(err)
-                    } else {
-                        throw err
-                    }
-                };
-                if (result29) {
-                    w(function(err, result30) {
-                        if (err) {
-                            if (callback) {
-                                return callback(err)
-                            } else {
-                                throw err
-                            }
-                        };
-                        result30;
-                        z(function(err, result31) {
-                            if (err) {
-                                if (callback) {
-                                    return callback(err)
-                                } else {
-                                    throw err
-                                }
-                            };
-                            result31;
-                            while_loop28();
+                            setTimeout(while_loop23, 0);
                         });
                     });
                 }

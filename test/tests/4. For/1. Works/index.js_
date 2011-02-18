@@ -17,7 +17,9 @@ function f_() {
     return 5
 }
 
-function f_template_() {
+/*
+// intermediate transformation to:
+function f_() {
     x_()
     while (y_()) {
         w_()
@@ -25,6 +27,7 @@ function f_template_() {
     }
     return 5
 }
+*/
 
 var w_called = false
 function w_() {

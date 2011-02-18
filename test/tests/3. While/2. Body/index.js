@@ -21,7 +21,7 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    while_loop19();
+    setTimeout(while_loop19, 0);
     function while_loop19() {
         count(function(err, result20) {
             if (err) {
@@ -41,7 +41,7 @@ function pow(base, exponent, callback) {
                         }
                     };
                     n = result21;
-                    while_loop19();
+                    setTimeout(while_loop19, 0);
                 });
             }
              else {

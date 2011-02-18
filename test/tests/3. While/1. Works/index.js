@@ -14,7 +14,7 @@ function pow(base, exponent, callback) {
         };
     };
     var n = 1;
-    while_loop17();
+    setTimeout(while_loop17, 0);
     function while_loop17() {
         g(function(err, result18) {
             if (err) {
@@ -26,7 +26,7 @@ function pow(base, exponent, callback) {
             };
             if ((result18 > 0)) {
                 n *= base;
-                while_loop17();
+                setTimeout(while_loop17, 0);
             }
              else {
                 if (callback) {
