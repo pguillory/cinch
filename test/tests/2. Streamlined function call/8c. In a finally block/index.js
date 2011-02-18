@@ -7,9 +7,9 @@ exports.test = function(next, assert) {
     });
 };
 function f(callback) {
-    return try_block(function(err) {
+    return __try_block_1(function(err) {
         if (err) {
-            catch_block(err, function(err) {
+            __catch_block_2(err, function(err) {
                 if (err) {
                     if (callback) {
                         return callback(err)
@@ -17,7 +17,7 @@ function f(callback) {
                         throw err
                     }
                 };
-                finally_block(function(err) {
+                __finally_block_3(function(err) {
                     if (err) {
                         if (callback) {
                             return callback(err)
@@ -25,12 +25,12 @@ function f(callback) {
                             throw err
                         }
                     };
-                    rest_block(callback);
+                    __rest_block_4(callback);
                 });
             });
         }
          else {
-            finally_block(function(err) {
+            __finally_block_3(function(err) {
                 if (err) {
                     if (callback) {
                         return callback(err)
@@ -38,27 +38,27 @@ function f(callback) {
                         throw err
                     }
                 };
-                rest_block(callback);
+                __rest_block_4(callback);
             });
         }
     ;
     });
-    function try_block(callback) {
+    function __try_block_1(callback) {
         if (callback) {
             return callback(null)
         } else {
             return
         };
     };
-    function catch_block(err, callback) {
+    function __catch_block_2(err, callback) {
         if (callback) {
             return callback(null)
         } else {
             return
         };
     };
-    function finally_block(callback) {
-        g(function(err, __async_result_1) {
+    function __finally_block_3(callback) {
+        g(function(err, __async_result_5) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -66,7 +66,7 @@ function f(callback) {
                     throw err
                 }
             };
-            __async_result_1;
+            __async_result_5;
             if (callback) {
                 return callback(null)
             } else {
@@ -74,7 +74,7 @@ function f(callback) {
             };
         });
     };
-    function rest_block(callback) {
+    function __rest_block_4(callback) {
         if (callback) {
             return callback(null, 5)
         } else {
