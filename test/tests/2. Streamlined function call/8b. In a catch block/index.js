@@ -19,11 +19,10 @@ function f(__callback_2) {
         __rest_block_6();
     };
     function __catch_block_4(err) {
-        g(function(err, __result_8) {
+        g(function(err) {
             if (err) {
                 return __callback_2(err)
             };
-            __result_8;
             __rest_block_6();
         });
     };
@@ -32,10 +31,10 @@ function f(__callback_2) {
     };
 };
 var g_called = false;
-function g(__callback_9) {
-    __callback_9 = (__callback_9 || __throw_1);
+function g(__callback_8) {
+    __callback_8 = (__callback_8 || __throw_1);
     g_called = true;
-    return __callback_9(null);
+    return __callback_8(null);
 };
 function __throw_1(err) {
     if (err) {

@@ -7,19 +7,13 @@ exports.test = function(next, assert) {
 };
 function f(__callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    g(function(err, __result_3) {
-        if (err) {
-            return __callback_2(err)
-        };
-        __result_3;
-        return __callback_2(null);
-    });
+    g(__callback_2);
 };
 var g_called = false;
-function g(__callback_4) {
-    __callback_4 = (__callback_4 || __throw_1);
+function g(__callback_3) {
+    __callback_3 = (__callback_3 || __throw_1);
     g_called = true;
-    return __callback_4(null);
+    return __callback_3(null);
 };
 function __throw_1(err) {
     if (err) {
