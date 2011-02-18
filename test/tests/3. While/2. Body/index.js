@@ -6,17 +6,24 @@ exports.test = function(next, assert) {
     });
 };
 function pow(base, exponent, callback) {
-    function g(callback) {
+    function count(callback) {
         if (callback) {
             return callback(null, exponent--)
         } else {
             return
         };
     };
+    function times(a, b, callback) {
+        if (callback) {
+            return callback(null, (a * b))
+        } else {
+            return
+        };
+    };
     var n = 1;
-    while_loop17();
-    function while_loop17() {
-        g(function(err, result18) {
+    while_loop19();
+    function while_loop19() {
+        count(function(err, result20) {
             if (err) {
                 if (callback) {
                     return callback(err)
@@ -24,9 +31,18 @@ function pow(base, exponent, callback) {
                     throw err
                 }
             };
-            if ((result18 > 0)) {
-                n *= base;
-                while_loop17();
+            if ((result20 > 0)) {
+                times(n, base, function(err, result21) {
+                    if (err) {
+                        if (callback) {
+                            return callback(err)
+                        } else {
+                            throw err
+                        }
+                    };
+                    n = result21;
+                    while_loop19();
+                });
             }
              else {
                 if (callback) {

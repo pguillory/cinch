@@ -1,0 +1,52 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.is_null(err)
+        assert.equal(result, 5)
+        assert.is_true(w_called)
+        assert.is_true(x_called)
+        assert.is_true(y_called)
+        assert.is_true(z_called)
+        next()
+    })
+}
+
+function f_() {
+    for (x_(); y_(); z_()) {
+        w_()
+    }
+    return 5
+}
+
+function f_template_() {
+    x_()
+    while (y_()) {
+        w_()
+        z_()
+    }
+    return 5
+}
+
+var w_called = false
+function w_() {
+    w_called = true
+}
+
+var x_called = false
+function x_() {
+    x_called = true
+}
+
+var y_called = false
+function y_() {
+    if (y_called) {
+        return false
+    } else {
+        y_called = true
+        return true
+    }
+}
+
+var z_called = false
+function z_() {
+    z_called = true
+}
