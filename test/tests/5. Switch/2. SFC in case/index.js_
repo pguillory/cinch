@@ -6,22 +6,16 @@ exports.test = function(next, assert) {
 }
 
 function f_() {
-    console.log('5.2. f_()')
     switch ('foo') {
         case 'bar':
-            console.log('5.2. case bar')
             break
         case 'foo':
-            console.log('5.2. case foo')
             return g_()
         default:
-            console.log('5.2. default')
             return 7
     }
-    console.log('5.2. rest')
 }
 
 function g_() {
-    console.log('5.2. g_()')
     return 5
 }
