@@ -34,9 +34,8 @@ function f(__callback_2) {
         return __callback_2(null);
     };
 };
-function g(__callback_8) {
-    __callback_8 = (__callback_8 || __throw_1);
-    return __callback_8(null, 5);
+function g(callback) {
+    return callback(null, 5);
 };
 function __throw_1(err) {
     if (err) {
