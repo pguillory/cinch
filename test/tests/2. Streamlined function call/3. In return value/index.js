@@ -12,12 +12,10 @@ function f(__callback_2) {
             return __callback_2(err)
         };
         return __callback_2(null, (__result_3 + 1));
-        return __callback_2(null);
     });
 };
 function g(__callback_4) {
     __callback_4 = (__callback_4 || __throw_1);
     return __callback_4(null, 5);
-    return __callback_4(null);
 };
 function __throw_1(err) {if (err) {throw err}};

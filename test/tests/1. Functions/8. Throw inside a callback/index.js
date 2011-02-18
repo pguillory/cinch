@@ -18,7 +18,6 @@ function f(crash, __callback_2) {
         return __callback_2(err);
     };
     return __callback_2(null, __retval_3);
-    return __callback_2(null);
 };
 function g(crash) {
     if (crash) {

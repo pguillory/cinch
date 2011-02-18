@@ -10,12 +10,10 @@ function pow(base, exponent, __callback_2) {
     function count(__callback_6) {
         __callback_6 = (__callback_6 || __throw_1);
         return __callback_6(null, exponent--);
-        return __callback_6(null);
     };
     function times(a, b, __callback_7) {
         __callback_7 = (__callback_7 || __throw_1);
         return __callback_7(null, (a * b));
-        return __callback_7(null);
     };
     var n = 1;
     __while_loop_3();
@@ -35,7 +33,6 @@ function pow(base, exponent, __callback_2) {
             }
              else {
                 return __callback_2(null, n);
-                return __callback_2(null);
             }
         ;
         });

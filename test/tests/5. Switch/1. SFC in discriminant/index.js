@@ -20,20 +20,16 @@ function f(__callback_2) {
         __rest_6();
         function __case_4() {
             return __callback_2(null, 6);
-            __case_5();
         };
         function __case_5() {
             return __callback_2(null, 7);
-            __rest_6();
         };
         function __rest_6() {
             return __callback_2(null);
         };
     });
 };
-function g(__callback_7) {
-    __callback_7 = (__callback_7 || __throw_1);
-    return __callback_7(null, 5);
-    return __callback_7(null);
+function g(callback) {
+    return callback(null, 5);
 };
 function __throw_1(err) {if (err) {throw err}};

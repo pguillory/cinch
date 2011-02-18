@@ -37,7 +37,6 @@ function f(__callback_2) {
                 }
                  else {
                     return __callback_2(null, 5);
-                    return __callback_2(null);
                 }
             ;
             });

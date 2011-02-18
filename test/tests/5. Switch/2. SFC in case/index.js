@@ -19,8 +19,7 @@ function f(__callback_2) {
     __rest_6();
     function __case_3() {
         console.log("5.2. case bar");
-        return __callback_2(null, __rest_6());
-        __case_4();
+        __rest_6();
     };
     function __case_4() {
         console.log("5.2. case foo");
@@ -29,15 +28,14 @@ function f(__callback_2) {
                 return __callback_2(err)
             };
             return __callback_2(null, __result_7);
-            __case_5();
         });
     };
     function __case_5() {
         console.log("5.2. default");
         return __callback_2(null, 7);
-        __rest_6();
     };
     function __rest_6() {
+        console.log("5.2. rest");
         return __callback_2(null);
     };
 };
@@ -45,6 +43,5 @@ function g(__callback_8) {
     __callback_8 = (__callback_8 || __throw_1);
     console.log("5.2. g_()");
     return __callback_8(null, 5);
-    return __callback_8(null);
 };
 function __throw_1(err) {if (err) {throw err}};

@@ -13,7 +13,6 @@ function f(__callback_2) {
             return __callback_2(err)
         };
         return __callback_2(null, __result_3);
-        return __callback_2(null);
     });
 };
 function g(callback) {

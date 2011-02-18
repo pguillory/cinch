@@ -16,13 +16,11 @@ function sum_squares(a, b, __callback_2) {
                 return __callback_2(err)
             };
             return __callback_2(null, (__result_3 + __result_4));
-            return __callback_2(null);
         });
     });
 };
 function square(x, __callback_5) {
     __callback_5 = (__callback_5 || __throw_1);
     return __callback_5(null, (x * x));
-    return __callback_5(null);
 };
 function __throw_1(err) {if (err) {throw err}};
