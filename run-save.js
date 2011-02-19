@@ -1,5 +1,5 @@
 var path = require('path');
-require('./index').registerExtension();
+require('./index').registerExtension({ saveSource: true });
 
 process.argv.splice(1, 1)
 
