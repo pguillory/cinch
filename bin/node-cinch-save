@@ -5,4 +5,4 @@ else
     self=$0
 fi
 dir=`dirname $self`
-node $dir/../run-save.js $*
+node $dir/../lib/run-save.js $*
