@@ -1,10 +1,10 @@
-Cinch is a Javascript extension.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
+Cinch is a Javascript source transformation tool.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
 
-Cinch modules use the extension `.js_` and contain regular Javascript syntax, with one bonus.  The Cinch engine will convert any function whose name ends in an underscore into asynchronous form.  The new function will have the same name (minus the underscore) and an extra callback parameter.
+Cinch modules use the extension `.js_` and contain regular Javascript syntax, with one bonus.  The Cinch engine will transform any function whose name ends in an underscore into asynchronous form.  The new function will have the same name (minus the underscore) and an extra callback parameter.
 
-Inside a converted function, you can call any asynchronous function (whether converted or hand-coded) as if it was synchronous by appending an underscore to its name.  You can mix such function calls with language constructs like `while`, `for`, `try`/`catch`, `throw`, and `return`, and they'll work as you hope.
+Inside a transformed function, you can call any asynchronous function (whether converted or hand-coded) as if it was synchronous by appending an underscore to its name.  You can mix such function calls with language constructs like `while`, `for`, `try`/`catch`, `throw`, and `return`, and they'll work as you hope.
 
-Cinch is backwards compatible with Javascript.  Converted functions and regular functions can coexist in the same module and call each other freely.
+Cinch is 100% compatible with regular Javascript code.  Transformed functions and regular functions can coexist in the same module and call each other freely.
 
 Example
 -------
