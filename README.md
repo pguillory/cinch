@@ -8,7 +8,7 @@ Cinch is 100% compatible with regular Javascript code.  Transformed functions an
 
 Example
 -------
-    var fs = require('fs')
+    var fs = require('fs');
 
     fileLength(__filename, function(err, length) {
         if (err) throw err;
@@ -17,7 +17,7 @@ Example
 
     function fileLength_(path) {
         return fs.readFile_(path).length;
-    }
+    };
 
 The function `fileLength()` will be converted into the following:
 
@@ -25,8 +25,8 @@ The function `fileLength()` will be converted into the following:
         fs.readFile(path, function(err, contents) {
             if (err) return callback(err);
             return callback(null, contents.length);
-        })
-    }
+        });
+    };
 
 Running Cinch code
 ------------------
