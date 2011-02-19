@@ -11,6 +11,7 @@ function f(__callback_2) {
         if (err) {
             return __callback_2(err)
         };
+        "statements.length = 0";
         if ((__result_3 === 5)) {
             __then_block_4();
         }

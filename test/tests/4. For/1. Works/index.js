@@ -22,6 +22,7 @@ function f(__callback_2) {
                 if (err) {
                     return __callback_2(err)
                 };
+                "statements.length = 0";
                 if (__result_5) {
                     __then_block_6();
                 }
@@ -39,16 +40,11 @@ function f(__callback_2) {
                                 return __callback_2(err)
                             };
                             setTimeout(__for_loop_3, 0);
-                            __rest_block_8();
                         });
                     });
                 };
                 function __else_block_7() {
                     __rest_4();
-                    __rest_block_8();
-                };
-                function __rest_block_8() {
-                
                 };
             });
         };
@@ -58,43 +54,44 @@ function f(__callback_2) {
     });
 };
 var w_called = false;
-function w(__callback_9) {
-    __callback_9 = (__callback_9 || __throw_1);
+function w(__callback_8) {
+    __callback_8 = (__callback_8 || __throw_1);
     w_called = true;
-    return __callback_9(null);
+    return __callback_8(null);
 };
 var x_called = false;
-function x(__callback_10) {
-    __callback_10 = (__callback_10 || __throw_1);
+function x(__callback_9) {
+    __callback_9 = (__callback_9 || __throw_1);
     x_called = true;
-    return __callback_10(null);
+    return __callback_9(null);
 };
 var y_called = false;
-function y(__callback_11) {
-    __callback_11 = (__callback_11 || __throw_1);
+function y(__callback_10) {
+    __callback_10 = (__callback_10 || __throw_1);
+    "statements.length = 0";
     if (y_called) {
-        __then_block_12();
+        __then_block_11();
     }
      else {
-        __else_block_13();
+        __else_block_12();
     }
 ;
-    function __then_block_12() {
-        return __callback_11(null, false);
+    function __then_block_11() {
+        return __callback_10(null, false);
     };
-    function __else_block_13() {
+    function __else_block_12() {
         y_called = true;
-        return __callback_11(null, true);
+        return __callback_10(null, true);
     };
-    function __rest_block_14() {
-        return __callback_11(null);
+    function __rest_block_13() {
+        return __callback_10(null);
     };
 };
 var z_called = false;
-function z(__callback_15) {
-    __callback_15 = (__callback_15 || __throw_1);
+function z(__callback_14) {
+    __callback_14 = (__callback_14 || __throw_1);
     z_called = true;
-    return __callback_15(null);
+    return __callback_14(null);
 };
 function __throw_1(err) {
     if (err) {

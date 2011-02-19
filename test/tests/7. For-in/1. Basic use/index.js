@@ -16,6 +16,7 @@ function sum(values, __callback_2) {
     var __i_4 = 0;
     __for_loop_5();
     function __for_loop_5() {
+        "statements.length = 0";
         if ((__i_4 < __props_3.length)) {
             __then_block_7();
         }
@@ -25,22 +26,17 @@ function sum(values, __callback_2) {
     ;
         function __then_block_7() {
             i = __props_3[__i_4];
-            return plus(total, values[i], function(err, __result_10) {
+            return plus(total, values[i], function(err, __result_9) {
                 if (err) {
                     return __callback_2(err)
                 };
-                total = __result_10;
+                total = __result_9;
                 ++__i_4;
                 setTimeout(__for_loop_5, 0);
-                __rest_block_9();
             });
         };
         function __else_block_8() {
             __rest_6();
-            __rest_block_9();
-        };
-        function __rest_block_9() {
-        
         };
     };
     function __rest_6() {

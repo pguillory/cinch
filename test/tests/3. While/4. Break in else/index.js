@@ -7,17 +7,18 @@ exports.test = function(next, assert) {
 };
 function pow(base, exponent, __callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    function count(__callback_13) {
-        __callback_13 = (__callback_13 || __throw_1);
-        return __callback_13(null, exponent--);
+    function count(__callback_12) {
+        __callback_12 = (__callback_12 || __throw_1);
+        return __callback_12(null, exponent--);
     };
-    function times(a, b, __callback_14) {
-        __callback_14 = (__callback_14 || __throw_1);
-        return __callback_14(null, (a * b));
+    function times(a, b, __callback_13) {
+        __callback_13 = (__callback_13 || __throw_1);
+        return __callback_13(null, (a * b));
     };
     var n = 1;
     __while_loop_3();
     function __while_loop_3() {
+        "statements.length = 0";
         if (true) {
             __then_block_5();
         }
@@ -26,41 +27,37 @@ function pow(base, exponent, __callback_2) {
         }
     ;
         function __then_block_5() {
-            return count(function(err, __result_8) {
+            return count(function(err, __result_7) {
                 if (err) {
                     return __callback_2(err)
                 };
-                if ((__result_8 > 0)) {
-                    __then_block_9();
+                "statements.length = 0";
+                if ((__result_7 > 0)) {
+                    __then_block_8();
                 }
                  else {
-                    __else_block_10();
+                    __else_block_9();
                 }
             ;
-                function __then_block_9() {
-                    return times(n, base, function(err, __result_12) {
+                function __then_block_8() {
+                    return times(n, base, function(err, __result_11) {
                         if (err) {
                             return __callback_2(err)
                         };
-                        n = __result_12;
-                        __rest_block_11();
+                        n = __result_11;
+                        __rest_block_10();
                     });
                 };
-                function __else_block_10() {
+                function __else_block_9() {
                     return __rest_4();
                 };
-                function __rest_block_11() {
+                function __rest_block_10() {
                     setTimeout(__while_loop_3, 0);
-                    __rest_block_7();
                 };
             });
         };
         function __else_block_6() {
             __rest_4();
-            __rest_block_7();
-        };
-        function __rest_block_7() {
-        
         };
     };
     function __rest_4() {

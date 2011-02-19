@@ -7,9 +7,9 @@ exports.test = function(next, assert) {
 };
 function pow(base, exponent, __callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
-    function g(__callback_9) {
-        __callback_9 = (__callback_9 || __throw_1);
-        return __callback_9(null, exponent--);
+    function g(__callback_8) {
+        __callback_8 = (__callback_8 || __throw_1);
+        return __callback_8(null, exponent--);
     };
     var n = 1;
     __while_loop_3();
@@ -18,6 +18,7 @@ function pow(base, exponent, __callback_2) {
             if (err) {
                 return __callback_2(err)
             };
+            "statements.length = 0";
             if ((__result_5 > 0)) {
                 __then_block_6();
             }
@@ -28,14 +29,9 @@ function pow(base, exponent, __callback_2) {
             function __then_block_6() {
                 n *= base;
                 setTimeout(__while_loop_3, 0);
-                __rest_block_8();
             };
             function __else_block_7() {
                 __rest_4();
-                __rest_block_8();
-            };
-            function __rest_block_8() {
-            
             };
         });
     };
