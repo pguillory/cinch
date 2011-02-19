@@ -16,7 +16,6 @@ function sum(values, __callback_2) {
     var __i_4 = 0;
     __for_loop_5();
     function __for_loop_5() {
-        "statements.length = 0";
         if ((__i_4 < __props_3.length)) {
             __then_block_7();
         }

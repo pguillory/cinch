@@ -22,7 +22,6 @@ function pow(base, exponent, __callback_2) {
             if (err) {
                 return __callback_2(err)
             };
-            "statements.length = 0";
             if ((__result_5 > 0)) {
                 __then_block_6();
             }

@@ -18,7 +18,6 @@ function pow(base, exponent, __callback_2) {
     var n = 1;
     __while_loop_3();
     function __while_loop_3() {
-        "statements.length = 0";
         if (true) {
             __then_block_5();
         }
@@ -31,7 +30,6 @@ function pow(base, exponent, __callback_2) {
                 if (err) {
                     return __callback_2(err)
                 };
-                "statements.length = 0";
                 if ((__result_7 == 0)) {
                     __then_block_8();
                 }

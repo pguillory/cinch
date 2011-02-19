@@ -14,7 +14,6 @@ function fileLength(path, __callback_2) {
         if (err) {
             return __callback_2(err)
         };
-        "statements.length = 0";
         if (__result_3.isFile()) {
             __then_block_4();
         }

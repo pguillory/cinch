@@ -22,7 +22,6 @@ function f(__callback_2) {
                 if (err) {
                     return __callback_2(err)
                 };
-                "statements.length = 0";
                 if (__result_5) {
                     __then_block_6();
                 }
@@ -68,7 +67,6 @@ function x(__callback_9) {
 var y_called = false;
 function y(__callback_10) {
     __callback_10 = (__callback_10 || __throw_1);
-    "statements.length = 0";
     if (y_called) {
         __then_block_11();
     }

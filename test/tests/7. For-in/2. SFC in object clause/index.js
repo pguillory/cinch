@@ -22,7 +22,6 @@ function factorial(n, __callback_2) {
         var __i_5 = 0;
         __for_loop_6();
         function __for_loop_6() {
-            "statements.length = 0";
             if ((__i_5 < __props_4.length)) {
                 __then_block_8();
             }
