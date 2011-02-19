@@ -1,9 +1,9 @@
-var Streamline = require('..');
+var cinch = require('..');
 var assert = require('./assert')
 var fs = require('fs')
 var path = require('path')
 
-Streamline.registerExtension({
+cinch.registerExtension({
     saveSource: true,
     saveParseTree: true,
 })

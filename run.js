@@ -1,6 +1,6 @@
 var path = require('path');
-var Streamline = require('.');
-Streamline.registerExtension();
+var cinch = require('.');
+cinch.registerExtension();
 
 if (process.argv.length <= 2) {
     console.log("Syntax:");

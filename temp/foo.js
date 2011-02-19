@@ -1,4 +1,4 @@
-/* streamlined */
+/* cinched */
 function sum_squares(a, b, callback) {
     function square(x, callback) {
         return callback(null, (x * x));

@@ -1,17 +1,15 @@
-Streamline-Lite
-===============
-Streamline is an extension to Javascript.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
+Cinch is a Javascript extension.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
 
-Streamlined modules use the extension `.js_`.  Any function whose name ends in an underscore is considered "streamlined."  The Streamline compiler will convert it into an equivalent asynchronous function in the standard last-parameter-callback form, minus the underscore suffix in the name.
+Cinch modules use the extension `.js_` and contain regular Javascript syntax, with one bonus.  The Cinch engine will convert any function whose name ends in an underscore into asynchronous form.  The new function will have the same name (minus the underscore) and an extra callback parameter.
 
-Inside a streamlined function, you can call an asynchronous function as if it was synchronous by appending an underscore to its name (a "streamlined function call").  You can mix streamlined function calls with language constructs like `while` loops, `for` loops, `try`/`catch` blocks, `throw`, and `return`, and they'll work as you hope.
+Inside a converted function, you can call any asynchronous function as if it was synchronous by appending an underscore to its name.  You can mix such function calls with language constructs like `while`, `for`, `try`/`catch`, `throw`, and `return`, and they'll work as you hope.
 
-Streamline is backwards compatible with Javascript.  Streamlined functions/modules can call regular functions/modules and vice versa.
+Cinch is backwards compatible with Javascript.  Converted functions/modules can call regular functions/modules and vice versa.
 
 Example
 -------
     /* myapp.js */
-    require('streamline').registerExtension({ saveSource: true });
+    require('cinch').registerExtension({ saveSource: true });
 
     var mymodule = require('./mymodule');
     mymodule.fileLength(__filename, function(err, length) {
@@ -29,7 +27,7 @@ Example
     }
     exports.fileLength = fileLength;
 
-The `saveSource` option will cause the transformed source of streamlined modules to be saved with a `.js` extension during the loading process.  These modules are pure Javascript and can be used without Streamline.
+The `saveSource` option will cause the transformed source of cinched modules to be saved with a `.js` extension during the loading process.  These modules are pure Javascript and can be used without Cinch.
 
     /* mymodule.js */
     function fileLength(path, callback) {
