@@ -1,5 +1,5 @@
-Streamline.js
-=============
+Streamline-Lite
+===============
 Streamline is an extension to Javascript.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
 
 Streamlined modules use the extension `.js_`.  Any function whose name ends in an underscore is considered "streamlined."  The Streamline compiler will convert it into an equivalent asynchronous function in the standard last-parameter-callback form, minus the underscore suffix in the name.
@@ -11,10 +11,10 @@ Streamline is backwards compatible with Javascript.  Streamlined functions/modul
 Example
 -------
     /* myapp.js */
-    require('streamline').registerExtension();
+    require('streamline').registerExtension({ saveSource: true });
 
     var mymodule = require('./mymodule');
-    mymodule.fileLength(argv[2], function(err, length) {
+    mymodule.fileLength(__filename, function(err, length) {
         if (err) throw err;
         console.log('Length: ' + length + ' bytes');
     });
@@ -29,15 +29,19 @@ Example
     }
     exports.fileLength = fileLength;
 
-`mymodule.js_` will be compiled on the fly roughly into this equivalent:
+The `saveSource` option will cause the transformed source of streamlined modules to be saved with a `.js` extension during the loading process.  These modules are pure Javascript and can be used without Streamline.
 
     /* mymodule.js */
     function fileLength(path, callback) {
       fs.stat(path, function(err, stat) {
-        if (err) return callback(err);
+        if (err) {
+          return callback(err);
+        }
         if (stat.isFile()) {
           fs.readFile(path, function(err, data) {
-            if (err) return callback(err);
+            if (err) {
+              return callback(err);
+            }
             callback(null, data.length);
           });
         } else {
@@ -46,15 +50,3 @@ Example
       });
     }
     exports.fileLength = fileLength;
-
-Known issues
-------------
-* Labelled `break` and `continue` are not yet supported.
-
-Discussion
-==========
-For support and discussion, please join the [streamline.js Google Group](http://groups.google.com/group/streamlinejs).
-
-License
-=======
-This work is licensed under the [MIT license](http://en.wikipedia.org/wiki/MIT_License).
