@@ -1,0 +1,22 @@
+/*****************************************************************************/
+/* Recursive directory listing (depth-first)
+/*****************************************************************************/
+var path = require('path')
+var fs = require('fs')
+var util = require('util')
+
+recursive_ls(path.join(process.cwd(), process.argv[2]))
+
+function recursive_ls_(dir, depth) {
+    var names = fs.readdir_(dir)
+
+    for (var i in names) {
+        if (names[i][0] !== '.') {
+            var name = path.join(dir, names[i])
+            console.log(name)
+            if (fs.stat_(name).isDirectory()) {
+                recursive_ls_(name, depth)
+            }
+        }
+    }
+}
