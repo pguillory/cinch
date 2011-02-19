@@ -48,3 +48,9 @@ The `saveSource` option will cause the transformed source of cinched modules to 
       });
     }
     exports.fileLength = fileLength;
+
+History
+-------
+Cinch started as a fork of [Streamline.js] [1] and turned into a full rewrite.
+
+[1]: https://github.com/Sage/streamlinejs

@@ -1,0 +1,10 @@
+var fs = require('fs')
+
+fileLength(__filename, function(err, length) {
+    if (err) throw err;
+    console.log('I am ' + length + ' bytes long');
+});
+
+function fileLength_(path) {
+    return fs.readFile_(path).length;
+}

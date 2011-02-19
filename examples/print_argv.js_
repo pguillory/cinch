@@ -1,0 +1,2 @@
+var util = require('util')
+console.log('argv: ' + util.inspect(process.argv))
