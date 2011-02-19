@@ -1,0 +1,11 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.equal(result, 5)
+        next()
+    })
+}
+
+
+var f = function _() {
+    if (true) return 5
+}
