@@ -19,12 +19,7 @@ function f(__callback_2) {
         __rest_6();
     };
     function __case_4() {
-        return g(function(err, __result_7) {
-            if (err) {
-                return __callback_2(err)
-            };
-            return __callback_2(null, __result_7);
-        });
+        return g(__callback_2);
     };
     function __case_5() {
         return __callback_2(null, 7);
