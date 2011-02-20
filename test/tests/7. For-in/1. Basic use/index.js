@@ -19,7 +19,7 @@ function sum(values, __callback_2) {
             __then_block_7();
         }
          else {
-            __else_block_8();
+            __rest_6();
         }
     ;
         function __then_block_7() {
@@ -33,9 +33,7 @@ function sum(values, __callback_2) {
                 setTimeout(__for_loop_5, 0);
             });
         };
-        function __else_block_8() {
-            __rest_6();
-        };
+    ;
     };
     function __rest_6() {
         return __callback_2(null, total);

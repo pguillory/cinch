@@ -21,16 +21,14 @@ function pow(base, exponent, __callback_2) {
                 __then_block_6();
             }
              else {
-                __else_block_7();
+                __rest_4();
             }
         ;
             function __then_block_6() {
                 n *= base;
                 setTimeout(__while_loop_3, 0);
             };
-            function __else_block_7() {
-                __rest_4();
-            };
+        ;
         });
     };
     function __rest_4() {

@@ -8,16 +8,14 @@ function f(__callback_2) {
     __callback_2 = (__callback_2 || __throw_1);
     switch ("foo") {
       case "bar":
-        return __case_3();
+        return __rest_6();
       case "foo":
         return __case_4();
       default:
         return __case_5();
     };
     __rest_6();
-    function __case_3() {
-        __rest_6();
-    };
+;
     function __case_4() {
         return g(__callback_2);
     };

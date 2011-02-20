@@ -25,7 +25,7 @@ function factorial(n, __callback_2) {
                 __then_block_8();
             }
              else {
-                __else_block_9();
+                __rest_7();
             }
         ;
             function __then_block_8() {
@@ -34,9 +34,7 @@ function factorial(n, __callback_2) {
                 ++__i_5;
                 setTimeout(__for_loop_6, 0);
             };
-            function __else_block_9() {
-                __rest_7();
-            };
+        ;
         };
         function __rest_7() {
             return __callback_2(null, m);
