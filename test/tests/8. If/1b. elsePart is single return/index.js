@@ -5,7 +5,6 @@ exports.test = function(next, assert) {
     });
 };
 var f = function(__callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     if (false) {
         __rest_block_5();
     }
@@ -20,10 +19,4 @@ var f = function(__callback_2) {
     function __rest_block_5() {
         return __callback_2(null);
     };
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

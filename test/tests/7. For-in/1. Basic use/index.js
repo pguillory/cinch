@@ -6,7 +6,6 @@ exports.test = function(next, assert) {
     });
 };
 function sum(values, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     var total = 0;
     var __props_3 = [];
     for (var i in values) {
@@ -41,10 +40,4 @@ function sum(values, __callback_2) {
 };
 function plus(a, b, callback) {
     return callback(null, (a + b));
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

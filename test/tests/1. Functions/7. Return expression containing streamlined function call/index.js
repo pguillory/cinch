@@ -5,7 +5,6 @@ exports.test = function(next, assert) {
     });
 };
 function sum_squares(a, b, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     return square(a, function(err, __result_3) {
         if (err) {
             return __callback_2(err)
@@ -19,12 +18,5 @@ function sum_squares(a, b, __callback_2) {
     });
 };
 function square(x, __callback_5) {
-    __callback_5 = (__callback_5 || __throw_1);
     return __callback_5(null, (x * x));
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

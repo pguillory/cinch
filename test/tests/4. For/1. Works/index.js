@@ -10,7 +10,6 @@ exports.test = function(next, assert) {
     });
 };
 function f(__callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     x(function(err) {
         if (err) {
             return __callback_2(err)
@@ -51,19 +50,16 @@ function f(__callback_2) {
 };
 var w_called = false;
 function w(__callback_8) {
-    __callback_8 = (__callback_8 || __throw_1);
     w_called = true;
     return __callback_8(null);
 };
 var x_called = false;
 function x(__callback_9) {
-    __callback_9 = (__callback_9 || __throw_1);
     x_called = true;
     return __callback_9(null);
 };
 var y_called = false;
 function y(__callback_10) {
-    __callback_10 = (__callback_10 || __throw_1);
     if (y_called) {
         __then_block_11();
     }
@@ -84,13 +80,6 @@ function y(__callback_10) {
 };
 var z_called = false;
 function z(__callback_14) {
-    __callback_14 = (__callback_14 || __throw_1);
     z_called = true;
     return __callback_14(null);
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

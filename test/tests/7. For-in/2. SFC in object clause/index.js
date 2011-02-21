@@ -7,7 +7,6 @@ exports.test = function(next, assert) {
     });
 };
 function factorial(n, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     var m = 1;
     var values;
     return range(1, n, function(err, __result_3) {
@@ -47,10 +46,4 @@ function range(min, max, callback) {
         numbers.push(i);
     };
     return callback(null, numbers);
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

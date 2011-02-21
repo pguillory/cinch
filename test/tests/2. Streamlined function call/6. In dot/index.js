@@ -8,7 +8,6 @@ exports.test = function(next, assert) {
     });
 };
 function fileLength(path, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     return fs.stat(path, function(err, __result_3) {
         if (err) {
             return __callback_2(err)
@@ -35,10 +34,4 @@ function fileLength(path, __callback_2) {
             return __callback_2(null);
         };
     });
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

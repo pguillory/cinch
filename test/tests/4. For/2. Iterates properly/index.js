@@ -6,7 +6,6 @@ exports.test = function(next, assert) {
     });
 };
 function pow(base, exponent, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     var n = 1;
     return zero(function(err, __result_4) {
         if (err) {
@@ -60,10 +59,4 @@ function increment(i, callback) {
 };
 function multiply(a, b, callback) {
     return callback(null, (a * b));
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
-    }
-;
 };

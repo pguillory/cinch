@@ -10,7 +10,6 @@ exports.test = function(next, assert) {
     });
 };
 function f(crash, __callback_2) {
-    __callback_2 = (__callback_2 || __throw_1);
     try {
         __retval_3 = (g(crash) + 1);
     } catch (err) {
@@ -24,12 +23,6 @@ function g(crash) {
     }
      else {
         return 1;
-    }
-;
-};
-function __throw_1(err) {
-    if (err) {
-        throw err;
     }
 ;
 };
