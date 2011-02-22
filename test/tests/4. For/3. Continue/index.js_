@@ -1,0 +1,14 @@
+exports.test = function(next, assert) {
+    f(function(err, result) {
+        assert.is_null(err)
+        assert.equal(result, 5)
+        next()
+    })
+}
+
+function f_() {
+    for (var i = 0; i < 10; i++) {
+        if (i !== 5) continue;
+        return 5
+    }
+}

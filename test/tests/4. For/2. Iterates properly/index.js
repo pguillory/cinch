@@ -7,11 +7,11 @@ exports.test = function(next, assert) {
 };
 function pow(base, exponent, __callback_2) {
     var n = 1;
-    return zero(function(err, __result_4) {
+    return zero(function(err, __result_11) {
         if (err) {
             return __callback_2(err)
         };
-        var i = __result_4;
+        var i = __result_11;
         __for_loop_3();
         function __for_loop_3() {
             return less_than(i, exponent, function(err, __result_6) {
@@ -31,16 +31,19 @@ function pow(base, exponent, __callback_2) {
                             return __callback_2(err)
                         };
                         n = __result_9;
-                        return increment(i, function(err, __result_10) {
-                            if (err) {
-                                return __callback_2(err)
-                            };
-                            i = __result_10;
-                            setTimeout(__for_loop_3, 0);
-                        });
+                        __continue_4();
                     });
                 };
             ;
+            });
+        };
+        function __continue_4() {
+            return increment(i, function(err, __result_10) {
+                if (err) {
+                    return __callback_2(err)
+                };
+                i = __result_10;
+                setTimeout(__for_loop_3, 0);
             });
         };
         function __break_5() {

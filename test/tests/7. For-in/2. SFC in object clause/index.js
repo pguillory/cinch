@@ -21,21 +21,24 @@ function factorial(n, __callback_2) {
         __for_loop_6();
         function __for_loop_6() {
             if ((__i_5 < __props_4.length)) {
-                __then_block_8();
+                __then_block_9();
             }
              else {
-                __break_7();
+                __break_8();
             }
         ;
-            function __then_block_8() {
+            function __then_block_9() {
                 i = __props_4[__i_5];
                 m *= values[i];
-                ++__i_5;
-                setTimeout(__for_loop_6, 0);
+                __continue_7();
             };
         ;
         };
-        function __break_7() {
+        function __continue_7() {
+            ++__i_5;
+            setTimeout(__for_loop_6, 0);
+        };
+        function __break_8() {
             return __callback_2(null, m);
         };
     });
