@@ -1,0 +1,19 @@
+exports.test = function(next, assert) {
+    divide_integers(22, 3, function(err, result) {
+        assert.equal(result, 7)
+        next()
+    })
+}
+
+function divide_integers_(dividend, divisor) {
+    var i = 0
+    var quotient = 0
+    while (i < dividend) {
+        i++
+        if (i % divisor > 0) {
+            continue
+        }
+        quotient++
+    }
+    return quotient
+}
