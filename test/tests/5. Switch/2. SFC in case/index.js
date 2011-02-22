@@ -7,13 +7,13 @@ exports.test = function(next, assert) {
 function f(__callback_2) {
     switch ("foo") {
       case "bar":
-        return __rest_6();
+        return __break_6();
       case "foo":
         return __case_4();
       default:
         return __case_5();
     };
-    __rest_6();
+    __break_6();
 ;
     function __case_4() {
         return g(__callback_2);
@@ -21,7 +21,7 @@ function f(__callback_2) {
     function __case_5() {
         return __callback_2(null, 7);
     };
-    function __rest_6() {
+    function __break_6() {
         return __callback_2(null);
     };
 };

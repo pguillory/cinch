@@ -22,7 +22,7 @@ function pow(base, exponent, __callback_2) {
                     __then_block_7();
                 }
                  else {
-                    __rest_5();
+                    __break_5();
                 }
             ;
                 function __then_block_7() {
@@ -43,7 +43,7 @@ function pow(base, exponent, __callback_2) {
             ;
             });
         };
-        function __rest_5() {
+        function __break_5() {
             return __callback_2(null, n);
         };
     });

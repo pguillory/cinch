@@ -18,7 +18,7 @@ function pow(base, exponent, __callback_2) {
             __then_block_5();
         }
          else {
-            __rest_4();
+            __break_4();
         }
     ;
         function __then_block_5() {
@@ -34,7 +34,7 @@ function pow(base, exponent, __callback_2) {
                 }
             ;
                 function __then_block_8() {
-                    return __rest_4();
+                    return __break_4();
                 };
                 function __rest_block_9() {
                     return times(n, base, function(err, __result_10) {
@@ -49,7 +49,7 @@ function pow(base, exponent, __callback_2) {
         };
     ;
     };
-    function __rest_4() {
+    function __break_4() {
         return __callback_2(null, n);
     };
 };

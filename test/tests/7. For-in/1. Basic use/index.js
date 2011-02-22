@@ -18,7 +18,7 @@ function sum(values, __callback_2) {
             __then_block_7();
         }
          else {
-            __rest_6();
+            __break_6();
         }
     ;
         function __then_block_7() {
@@ -34,7 +34,7 @@ function sum(values, __callback_2) {
         };
     ;
     };
-    function __rest_6() {
+    function __break_6() {
         return __callback_2(null, total);
     };
 };

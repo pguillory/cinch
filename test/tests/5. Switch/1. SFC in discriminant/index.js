@@ -15,14 +15,14 @@ function f(__callback_2) {
           default:
             return __case_5();
         };
-        __rest_6();
+        __break_6();
         function __case_4() {
             return __callback_2(null, 6);
         };
         function __case_5() {
             return __callback_2(null, 7);
         };
-        function __rest_6() {
+        function __break_6() {
             return __callback_2(null);
         };
     });
