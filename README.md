@@ -19,7 +19,7 @@ Example
         return fs.readFile_(path).length;
     };
 
-The function `fileLength()` will be converted into the following:
+The function `fileLength_()` will be converted into the following:
 
     function fileLength(path, callback) {
         fs.readFile(path, function(err, contents) {
