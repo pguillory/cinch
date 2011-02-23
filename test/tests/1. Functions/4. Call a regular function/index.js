@@ -5,7 +5,11 @@ exports.test = function(next, assert) {
     });
 };
 function f(__callback_2) {
-    g();
+    try {
+        g();
+    } catch (err) {
+        return __callback_2(err);
+    };
     return __callback_2(null);
 };
 var g_called = false;

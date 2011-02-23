@@ -12,10 +12,11 @@ function f(__callback_2) {
         var __callback_2 = function(err, result) {
             (err ? __catch_block_4 : __main_callback_7)(err, result);
         };
-        g(function(err) {
+        return g(function(err, __result_8) {
             if (err) {
                 return __callback_2(err)
             };
+            __result_8;
             __rest_block_6();
         });
     };
@@ -27,7 +28,7 @@ function f(__callback_2) {
     };
 };
 var g_called = false;
-function g(__callback_8) {
+function g(__callback_9) {
     g_called = true;
-    return __callback_8(null);
+    return __callback_9(null);
 };
