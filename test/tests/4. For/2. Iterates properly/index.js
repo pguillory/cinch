@@ -19,13 +19,6 @@ function pow(base, exponent, __callback_2) {
                     return __callback_2(err)
                 };
                 if (__result_6) {
-                    __then_block_7();
-                }
-                 else {
-                    __break_5();
-                }
-            ;
-                function __then_block_7() {
                     return multiply(n, base, function(err, __result_9) {
                         if (err) {
                             return __callback_2(err)
@@ -33,7 +26,10 @@ function pow(base, exponent, __callback_2) {
                         n = __result_9;
                         __continue_4();
                     });
-                };
+                }
+                 else {
+                    return __callback_2(null, n);
+                }
             ;
             });
         };
@@ -45,9 +41,6 @@ function pow(base, exponent, __callback_2) {
                 i = __result_10;
                 setTimeout(__for_loop_3, 0);
             });
-        };
-        function __break_5() {
-            return __callback_2(null, n);
         };
     });
 };

@@ -6,16 +6,10 @@ exports.test = function(next, assert) {
 };
 var f = function(__callback_2) {
     if (true) {
-        __then_block_3();
+        return __callback_2(null, 5);
     }
      else {
-        __rest_block_4();
+        return __callback_2(null);
     }
 ;
-    function __then_block_3() {
-        return __callback_2(null, 5);
-    };
-    function __rest_block_4() {
-        return __callback_2(null);
-    };
 };

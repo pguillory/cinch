@@ -10,18 +10,12 @@ function f(__callback_2) {
             return __callback_2(err)
         };
         if ((__result_3 === 5)) {
-            __then_block_4();
+            return __callback_2(null, 6);
         }
          else {
-            __rest_block_5();
+            return __callback_2(null);
         }
     ;
-        function __then_block_4() {
-            return __callback_2(null, 6);
-        };
-        function __rest_block_5() {
-            return __callback_2(null);
-        };
     });
 };
 function g(__callback_6) {

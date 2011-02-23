@@ -16,18 +16,12 @@ function f(crash, __callback_2) {
         return __callback_2(err);
     };
     if (__result_3) {
-        __then_block_4();
+        return __callback_2(null, 5);
     }
      else {
-        __rest_block_5();
+        return __callback_2(null);
     }
 ;
-    function __then_block_4() {
-        return __callback_2(null, 5);
-    };
-    function __rest_block_5() {
-        return __callback_2(null);
-    };
 };
 function g(crash) {
     if (crash) {

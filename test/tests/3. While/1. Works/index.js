@@ -16,20 +16,13 @@ function pow(base, exponent, __callback_2) {
                 return __callback_2(err)
             };
             if ((__result_5 > 0)) {
-                __then_block_6();
-            }
-             else {
-                __break_4();
-            }
-        ;
-            function __then_block_6() {
                 n *= base;
                 setTimeout(__while_loop_3, 0);
-            };
+            }
+             else {
+                return __callback_2(null, n);
+            }
         ;
         });
-    };
-    function __break_4() {
-        return __callback_2(null, n);
     };
 };

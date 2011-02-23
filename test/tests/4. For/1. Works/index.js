@@ -22,13 +22,6 @@ function f(__callback_2) {
                     return __callback_2(err)
                 };
                 if (__result_6) {
-                    __then_block_7();
-                }
-                 else {
-                    __break_5();
-                }
-            ;
-                function __then_block_7() {
                     return w(function(err, __result_9) {
                         if (err) {
                             return __callback_2(err)
@@ -36,7 +29,10 @@ function f(__callback_2) {
                         __result_9;
                         __continue_4();
                     });
-                };
+                }
+                 else {
+                    return __callback_2(null, 5);
+                }
             ;
             });
         };
@@ -48,9 +44,6 @@ function f(__callback_2) {
                 __result_10;
                 setTimeout(__for_loop_3, 0);
             });
-        };
-        function __break_5() {
-            return __callback_2(null, 5);
         };
     });
 };
@@ -67,19 +60,13 @@ function x(__callback_13) {
 var y_called = false;
 function y(__callback_14) {
     if (y_called) {
-        __then_block_15();
+        return __callback_14(null, false);
     }
      else {
-        __else_block_16();
-    }
-;
-    function __then_block_15() {
-        return __callback_14(null, false);
-    };
-    function __else_block_16() {
         y_called = true;
         return __callback_14(null, true);
-    };
+    }
+;
     function __rest_block_17() {
         return __callback_14(null);
     };

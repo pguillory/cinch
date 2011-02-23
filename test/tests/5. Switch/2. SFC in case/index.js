@@ -14,7 +14,6 @@ function f(__callback_2) {
         return __case_5();
     };
     __break_6();
-;
     function __case_4() {
         return g(__callback_2);
     };
