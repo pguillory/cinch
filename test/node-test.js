@@ -11,11 +11,14 @@ cinch.registerExtension({
 var tests = {}
 
 console.log('\n*** Compiling tests ***')
-fs.readdirSync(path.join(__dirname, 'tests')).forEach(function(chapter) {
+var tests_dir = path.join(__dirname, 'tests')
+fs.readdirSync(tests_dir).forEach(function(chapter) {
     console.log('\nChapter: ' + chapter)
-    fs.readdirSync(path.join(__dirname, 'tests', chapter)).forEach(function(test_name) {
+    var chapter_dir = path.join(tests_dir, chapter)
+    fs.readdirSync(chapter_dir).forEach(function(test_name) {
         console.log('Test: ' + test_name)
-        var test = require(path.join(__dirname, 'tests', chapter, test_name)).test
+        var test_dir = path.join(chapter_dir, test_name)
+        var test = require(test_dir).test
         tests['[' + chapter + '] ' + test_name] = test
     })
 })

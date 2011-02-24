@@ -22,9 +22,11 @@ Example
 The function `fileLength_()` will be converted into the following:
 
     function fileLength(path, callback) {
-        fs.readFile(path, function(err, contents) {
-            if (err) return callback(err);
-            return callback(null, contents.length);
+        fs.readFile(path, function(err, result) {
+            if (err) {
+              return callback(err);
+            };
+            return callback(null, result.length);
         });
     };
 
