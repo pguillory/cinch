@@ -1,0 +1,24 @@
+exports.test = function(next, assert) {
+    f(function(err, g) {
+        assert.equal(g(), 2)
+        next()
+    })
+}
+
+
+function f_() {
+    var x = 1
+
+    function g() {
+        return x
+    }
+
+    h_()
+
+    var x = 2
+
+    return g
+}
+
+function h_() {
+}
