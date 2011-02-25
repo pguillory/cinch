@@ -1,0 +1,21 @@
+{
+  "name": "cinch",
+  "description": "Async control flow made easy",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pguillory/cinch.git"
+  },
+  "author": "Preston Guillory <pguillory@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+      "node-cinch": "./bin/node-cinch",
+      "node-cinch-save": "./bin/node-cinch-save"
+  }
+}

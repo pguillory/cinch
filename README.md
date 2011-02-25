@@ -32,12 +32,12 @@ The function `fileLength_()` will be converted into the following:
 
 Running Cinch code
 ------------------
-The included script `bin/node-cinch` can be used in place of `node` to run `.js_` files directly.  Or you can call `require('cinch').registerExtension()` from a running script to enable `.js_` modules to be `require()`-ed.
+Use included script `node-cinch` instead of `node` to run `.js_` files directly.  Or you can call `require('cinch').registerExtension()` from a running script to enable `.js_` modules to be `require()`-ed.
 
 Alternatively, you can use `node-cinch-save` or `registerExtension({ saveSource: true })` to have it save pure-Javascript copies of your Cinch modules as `.js` files.  These are regular Javascript modules and can be used without Cinch.
 
 History
 -------
-Cinch started as a fork of [Streamline.js] [1] and turned into a full rewrite.
+Cinch started as a fork of the excellent [Streamline.js] [1] and turned into a full rewrite.
 
 [1]: https://github.com/Sage/streamlinejs

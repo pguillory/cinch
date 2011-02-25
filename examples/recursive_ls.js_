@@ -5,9 +5,11 @@ var path = require('path')
 var fs = require('fs')
 var util = require('util')
 
-recursive_ls(path.join(process.cwd(), process.argv[2]))
+recursive_ls(path.normalize(process.argv[2]), function(err) {
+    if (err) throw err
+})
 
-function recursive_ls_(dir, depth) {
+function recursive_ls_(dir) {
     var names = fs.readdir_(dir)
 
     for (var i in names) {
@@ -15,7 +17,7 @@ function recursive_ls_(dir, depth) {
             var name = path.join(dir, names[i])
             console.log(name)
             if (fs.stat_(name).isDirectory()) {
-                recursive_ls_(name, depth)
+                recursive_ls_(name)
             }
         }
     }

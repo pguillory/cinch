@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var cinch = require('..');
 var assert = require('./assert')
 var fs = require('fs')
