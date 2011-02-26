@@ -60,13 +60,6 @@ Narcissus.parser = (function() {
     // Set constants in the local scope.
     eval(definitions.consts);
 
-    // Banned statement types by language version.
-    const blackLists = { 185: {}, harmony: {} };
-    blackLists[185][IMPORT] = true;
-    blackLists[185][EXPORT] = true;
-    blackLists[185][MODULE] = true;
-    blackLists.harmony[WITH] = true;
-
     /*
      * pushDestructuringVarDecls :: (node, hoisting node) -> void
      *
@@ -83,18 +76,21 @@ Narcissus.parser = (function() {
         }
     }
 
-    function StaticContext(parentScript, parentBlock, inModule, inFunction) {
+    // NESTING_TOP: top-level
+    // NESTING_SHALLOW: nested within static forms such as { ... } or labeled statement
+    // NESTING_DEEP: nested within dynamic forms such as if, loops, etc.
+    const NESTING_TOP = 0, NESTING_SHALLOW = 1, NESTING_DEEP = 2;
+
+    function StaticContext(parentScript, parentBlock, inFunction, inForLoopInit, nesting) {
         this.parentScript = parentScript;
-        this.parentBlock = parentBlock || parentScript;
-        this.inModule = inModule || false;
-        this.inFunction = inFunction || false;
-        this.inForLoopInit = false;
-        this.topLevel = true;
+        this.parentBlock = parentBlock;
+        this.inFunction = inFunction;
+        this.inForLoopInit = inForLoopInit;
+        this.nesting = nesting;
         this.allLabels = new Stack();
         this.currentLabels = new Stack();
         this.labeledTargets = new Stack();
         this.defaultTarget = null;
-        this.blackList = blackLists[Narcissus.options.version];
         Narcissus.options.ecma3OnlyMode && (this.ecma3OnlyMode = true);
         Narcissus.options.parenFreeMode && (this.parenFreeMode = true);
     }
@@ -138,36 +134,23 @@ Narcissus.parser = (function() {
                                                 ? target
                                                 : this.defaultTarget });
         },
-        nest: function() {
-            return this.topLevel ? this.update({ topLevel: false }) : this;
-        },
-        allow: function(type) {
-            switch (type) {
-              case EXPORT:
-                if (!this.inModule || this.inFunction || !this.topLevel)
-                    return false;
-                // FALL THROUGH
-
-              case IMPORT:
-                return !this.inFunction && this.topLevel;
-
-              case MODULE:
-                return !this.inFunction && this.topLevel;
-
-              default:
-                return true;
-            }
+        nest: function(atLeast) {
+            var nesting = Math.max(this.nesting, atLeast);
+            return (nesting !== this.nesting)
+                 ? this.update({ nesting: nesting })
+                 : this;
         }
     };
 
     /*
-     * Script :: (tokenizer, boolean, boolean) -> node
+     * Script :: (tokenizer, boolean) -> node
      *
-     * Parses the toplevel and module/function bodies.
+     * Parses the toplevel and function bodies.
      */
-    function Script(t, inModule, inFunction) {
+    function Script(t, inFunction) {
         var n = new Node(t, scriptInit());
-        Statements(t, new StaticContext(n, n, inModule, inFunction), n);
+        var x = new StaticContext(n, n, inFunction, false, NESTING_TOP);
+        Statements(t, x, n);
         return n;
     }
 
@@ -261,13 +244,10 @@ Narcissus.parser = (function() {
         return { type: SCRIPT,
                  funDecls: [],
                  varDecls: [],
-                 modDefns: new StringMap(),
-                 modAssns: new StringMap(),
-                 modDecls: new StringMap(),
-                 modLoads: new StringMap(),
+                 modDecls: [],
                  impDecls: [],
                  expDecls: [],
-                 exports: new StringMap(),
+                 loadDeps: [],
                  hasEmptyReturn: false,
                  hasReturnWithValue: false,
                  isGenerator: false };
@@ -330,102 +310,6 @@ Narcissus.parser = (function() {
     const DECLARED_FORM = 0, EXPRESSED_FORM = 1, STATEMENT_FORM = 2;
 
     /*
-     * Export :: (binding node, boolean) -> Export
-     *
-     * Static semantic representation of a module export.
-     */
-    function Export(node, isDefinition) {
-        this.node = node;                 // the AST node declaring this individual export
-        this.isDefinition = isDefinition; // is the node an 'export'-annotated definition?
-        this.resolved = null;             // resolved pointer to the target of this export
-    }
-
-    /*
-     * registerExport :: (StringMap, EXPORT node) -> void
-     */
-    function registerExport(exports, decl) {
-        function register(name, exp) {
-            if (exports.has(name))
-                throw new SyntaxError("multiple exports of " + name);
-            exports.set(name, exp);
-        }
-
-        switch (decl.type) {
-          case MODULE:
-          case FUNCTION:
-            register(decl.name, new Export(decl, true));
-            break;
-
-          case VAR:
-            for (var i = 0; i < decl.children.length; i++)
-                register(decl.children[i].name, new Export(decl.children[i], true));
-            break;
-
-          case LET:
-          case CONST:
-            throw new Error("NYI: " + definitions.tokens[decl.type]);
-
-          case EXPORT:
-            for (var i = 0; i < decl.pathList.length; i++) {
-                var path = decl.pathList[i];
-                switch (path.type) {
-                  case OBJECT_INIT:
-                    for (var j = 0; j < path.children.length; j++) {
-                        // init :: IDENTIFIER | PROPERTY_INIT
-                        var init = path.children[j];
-                        if (init.type === IDENTIFIER)
-                            register(init.value, new Export(init, false));
-                        else
-                            register(init.children[0].value, new Export(init.children[1], false));
-                    }
-                    break;
-
-                  case DOT:
-                    register(path.children[1].value, new Export(path, false));
-                    break;
-
-                  case IDENTIFIER:
-                    register(path.value, new Export(path, false));
-                    break;
-
-                  default:
-                    throw new Error("unexpected export path: " + definitions.tokens[path.type]);
-                }
-            }
-            break;
-
-          default:
-            throw new Error("unexpected export decl: " + definitions.tokens[exp.type]);
-        }
-    }
-
-    /*
-     * Module :: (node) -> Module
-     *
-     * Static semantic representation of a module.
-     */
-    function Module(node) {
-        var exports = node.body.exports;
-        var modDefns = node.body.modDefns;
-
-        var exportedModules = new StringMap();
-
-        exports.forEach(function(name, exp) {
-            var node = exp.node;
-            if (node.type === MODULE) {
-                exportedModules.set(name, node);
-            } else if (!exp.isDefinition && node.type === IDENTIFIER && modDefns.has(node.value)) {
-                var mod = modDefns.get(node.value);
-                exportedModules.set(name, mod);
-            }
-        });
-
-        this.node = node;
-        this.exports = exports;
-        this.exportedModules = exportedModules;
-    }
-
-    /*
      * Statement :: (tokenizer, compiler context) -> node
      *
      * Parses a Statement.
@@ -433,74 +317,26 @@ Narcissus.parser = (function() {
     function Statement(t, x) {
         var i, label, n, n2, p, c, ss, tt = t.get(true), tt2, x2, x3;
 
-        if (x.blackList[tt])
-            throw t.newSyntaxError(definitions.tokens[tt] + " statements only allowed in Harmony");
-        if (!x.allow(tt))
-            throw t.newSyntaxError(definitions.tokens[tt] + " statement in illegal context");
-
         // Cases for statements ending in a right curly return early, avoiding the
         // common semicolon insertion magic after this switch.
         switch (tt) {
-          case IMPORT:
-            n = new Node(t);
-            n.pathList = ImportPathList(t, x);
-            x.parentScript.impDecls.push(n);
-            break;
-
-          case EXPORT:
-            switch (t.peek()) {
-              case MODULE:
-              case FUNCTION:
-              case LET:
-              case VAR:
-              case CONST:
-                n = Statement(t, x);
-                n.exported = true;
-                x.parentScript.expDecls.push(n);
-                registerExport(x.parentScript.exports, n);
-                return n;
-
-              default:
-                n = new Node(t);
-                n.pathList = ExportPathList(t, x);
-                break;
-            }
-            x.parentScript.expDecls.push(n);
-            registerExport(x.parentScript.exports, n);
-            break;
-
-          case MODULE:
-            n = new Node(t);
-            t.mustMatch(IDENTIFIER);
-            label = t.token.value;
-
-            if (t.match(LEFT_CURLY)) {
-                n.name = label;
-                n.body = Script(t, true, false);
-                n.module = new Module(n);
-                t.mustMatch(RIGHT_CURLY);
-                x.parentScript.modDefns.set(n.name, n);
-                return n;
-            }
-
-            t.unget();
-            ModuleVariables(t, x, n);
-            return n;
-
           case FUNCTION:
             // DECLARED_FORM extends funDecls of x, STATEMENT_FORM doesn't.
-            return FunctionDefinition(t, x, true, x.topLevel ? DECLARED_FORM : STATEMENT_FORM);
+            return FunctionDefinition(t, x, true,
+                                      (x.nesting !== NESTING_TOP)
+                                      ? STATEMENT_FORM
+                                      : DECLARED_FORM);
 
           case LEFT_CURLY:
             n = new Node(t, blockInit());
-            Statements(t, x.update({ parentBlock: n }).pushTarget(n).nest(), n);
+            Statements(t, x.update({ parentBlock: n }).pushTarget(n).nest(NESTING_SHALLOW), n);
             t.mustMatch(RIGHT_CURLY);
             return n;
 
           case IF:
             n = new Node(t);
             n.condition = HeadExpression(t, x);
-            x2 = x.pushTarget(n).nest();
+            x2 = x.pushTarget(n).nest(NESTING_DEEP);
             n.thenPart = Statement(t, x2);
             n.elsePart = t.match(ELSE) ? Statement(t, x2) : null;
             return n;
@@ -509,7 +345,7 @@ Narcissus.parser = (function() {
             // This allows CASEs after a DEFAULT, which is in the standard.
             n = new Node(t, { cases: [], defaultIndex: -1 });
             n.discriminant = HeadExpression(t, x);
-            x2 = x.pushTarget(n).nest();
+            x2 = x.pushTarget(n).nest(NESTING_DEEP);
             t.mustMatch(LEFT_CURLY);
             while ((tt = t.get()) !== RIGHT_CURLY) {
                 switch (tt) {
@@ -547,7 +383,7 @@ Narcissus.parser = (function() {
             }
             if (!x.parenFreeMode)
                 t.mustMatch(LEFT_PAREN);
-            x2 = x.pushTarget(n).nest();
+            x2 = x.pushTarget(n).nest(NESTING_DEEP);
             x3 = x.update({ inForLoopInit: true });
             if ((tt = t.peek()) !== SEMICOLON) {
                 if (tt === VAR || tt === CONST) {
@@ -617,12 +453,12 @@ Narcissus.parser = (function() {
           case WHILE:
             n = new Node(t, { isLoop: true });
             n.condition = HeadExpression(t, x);
-            n.body = Statement(t, x.pushTarget(n).nest());
+            n.body = Statement(t, x.pushTarget(n).nest(NESTING_DEEP));
             return n;
 
           case DO:
             n = new Node(t, { isLoop: true });
-            n.body = Statement(t, x.pushTarget(n).nest());
+            n.body = Statement(t, x.pushTarget(n).nest(NESTING_DEEP));
             t.mustMatch(WHILE);
             n.condition = HeadExpression(t, x);
             if (!x.ecmaStrictMode) {
@@ -710,7 +546,7 @@ Narcissus.parser = (function() {
           case WITH:
             n = new Node(t);
             n.object = HeadExpression(t, x);
-            n.body = Statement(t, x.pushTarget(n).nest());
+            n.body = Statement(t, x.pushTarget(n).nest(NESTING_DEEP));
             return n;
 
           case VAR:
@@ -745,7 +581,7 @@ Narcissus.parser = (function() {
                         throw t.newSyntaxError("Duplicate label");
                     t.get();
                     n = new Node(t, { type: LABEL, label: label });
-                    n.statement = Statement(t, x.pushLabel(label).nest());
+                    n.statement = Statement(t, x.pushLabel(label).nest(NESTING_SHALLOW));
                     n.target = (n.statement.type === LABEL) ? n.statement.target : n.statement;
                     return n;
                 }
@@ -764,9 +600,6 @@ Narcissus.parser = (function() {
         return n;
     }
 
-    /*
-     * MagicalSemicolon :: (tokenizer) -> void
-     */
     function MagicalSemicolon(t) {
         var tt;
         if (t.lineno === t.token.lineno) {
@@ -777,9 +610,6 @@ Narcissus.parser = (function() {
         t.match(SEMICOLON);
     }
 
-    /*
-     * ReturnOrYield :: (tokenizer, compiler context) -> (RETURN | YIELD) node
-     */
     function ReturnOrYield(t, x) {
         var n, b, tt = t.token.type, tt2;
 
@@ -819,129 +649,6 @@ Narcissus.parser = (function() {
     }
 
     /*
-     * ModuleExpression :: (tokenizer, compiler context) -> (STRING | IDENTIFIER | DOT) node
-     */
-    function ModuleExpression(t, x) {
-        return t.match(STRING) ? new Node(t) : QualifiedPath(t, x);
-    }
-
-    /*
-     * ImportPathList :: (tokenizer, compiler context) -> Array[DOT node]
-     */
-    function ImportPathList(t, x) {
-        var a = [];
-        do {
-            a.push(ImportPath(t, x));
-        } while (t.match(COMMA));
-        return a;
-    }
-
-    /*
-     * ImportPath :: (tokenizer, compiler context) -> DOT node
-     */
-    function ImportPath(t, x) {
-        var n = QualifiedPath(t, x);
-        if (!t.match(DOT)) {
-            if (n.type === IDENTIFIER)
-                throw t.newSyntaxError("cannot import local variable");
-            return n;
-        }
-
-        var n2 = new Node(t);
-        n2.push(n);
-        n2.push(ImportSpecifierSet(t, x));
-        return n2;
-    }
-
-    /*
-     * ExplicitSpecifierSet :: (tokenizer, compiler context, (tokenizer, compiler context) -> node)
-     *                      -> OBJECT_INIT node
-     */
-    function ExplicitSpecifierSet(t, x, SpecifierRHS) {
-        var n, n2, id, tt;
-
-        n = new Node(t, { type: OBJECT_INIT });
-        t.mustMatch(LEFT_CURLY);
-
-        if (!t.match(RIGHT_CURLY)) {
-            do {
-                id = Identifier(t, x);
-                if (t.match(COLON)) {
-                    n2 = new Node(t, { type: PROPERTY_INIT });
-                    n2.push(id);
-                    n2.push(SpecifierRHS(t, x));
-                    n.push(n2);
-                } else {
-                    n.push(id);
-                }
-            } while (!t.match(RIGHT_CURLY) && t.mustMatch(COMMA));
-        }
-
-        return n;
-    }
-
-    /*
-     * ImportSpecifierSet :: (tokenizer, compiler context) -> (IDENTIFIER | OBJECT_INIT) node
-     */
-    function ImportSpecifierSet(t, x) {
-        return t.match(MUL)
-             ? new Node(t, { type: IDENTIFIER, name: "*" })
-             : ExplicitSpecifierSet(t, x, Identifier);
-    }
-
-    /*
-     * Identifier :: (tokenizer, compiler context) -> IDENTIFIER node
-     */
-    function Identifier(t, x) {
-        t.mustMatch(IDENTIFIER);
-        return new Node(t, { type: IDENTIFIER });
-    }
-
-    /*
-     * QualifiedPath :: (tokenizer, compiler context) -> (IDENTIFIER | DOT) node
-     */
-    function QualifiedPath(t, x) {
-        var n, n2;
-
-        n = Identifier(t, x);
-
-        while (t.match(DOT)) {
-            if (t.peek() !== IDENTIFIER) {
-                // Unget the '.' token, which isn't part of the QualifiedPath.
-                t.unget();
-                break;
-            }
-            n2 = new Node(t);
-            n2.push(n);
-            n2.push(Identifier(t, x));
-            n = n2;
-        }
-
-        return n;
-    }
-
-    /*
-     * ExportPath :: (tokenizer, compiler context) -> (IDENTIFIER | DOT | OBJECT_INIT) node
-     */
-    function ExportPath(t, x) {
-        if (t.peek() === LEFT_CURLY)
-            return ExplicitSpecifierSet(t, x, QualifiedPath);
-        return QualifiedPath(t, x);
-    }
-
-    /*
-     * ExportPathList :: (tokenizer, compiler context)
-     *                -> Array[(IDENTIFIER | DOT | OBJECT_INIT) node]
-     */
-    function ExportPathList(t, x) {
-        var a = [];
-        do {
-            a.push(ExportPath(t, x));
-        } while (t.match(COMMA));
-        return a;
-    }
-
-    /*
      * FunctionDefinition :: (tokenizer, compiler context, boolean,
      *                        DECLARED_FORM or EXPRESSED_FORM or STATEMENT_FORM)
      *                    -> node
@@ -956,8 +663,7 @@ Narcissus.parser = (function() {
         else if (requireName)
             throw t.newSyntaxError("missing function identifier");
 
-        var inModule = x ? x.inModule : false;
-        var x2 = new StaticContext(null, null, inModule, true);
+        var x2 = new StaticContext(null, null, true, false, NESTING_TOP);
 
         t.mustMatch(LEFT_PAREN);
         if (!t.match(RIGHT_PAREN)) {
@@ -990,7 +696,7 @@ Narcissus.parser = (function() {
             if (f.body.isGenerator)
                 throw t.newSyntaxError("Generator returns a value");
         } else {
-            f.body = Script(t, inModule, true);
+            f.body = Script(t, true);
         }
 
         if (tt === LEFT_CURLY)
@@ -1001,28 +707,6 @@ Narcissus.parser = (function() {
         if (functionForm === DECLARED_FORM)
             x.parentScript.funDecls.push(f);
         return f;
-    }
-
-    /*
-     * ModuleVariables :: (tokenizer, compiler context, MODULE node) -> void
-     *
-     * Parses a comma-separated list of module declarations (and maybe
-     * initializations).
-     */
-    function ModuleVariables(t, x, n) {
-        var n1, n2;
-        do {
-            n1 = Identifier(t, x);
-            if (t.match(ASSIGN)) {
-                n2 = ModuleExpression(t, x);
-                n1.initializer = n2;
-                if (n2.type === STRING)
-                    x.parentScript.modLoads.set(n1.value, n2.value);
-                else
-                    x.parentScript.modAssns.set(n1.value, n1);
-            }
-            n.push(n1);
-        } while (t.match(COMMA));
     }
 
     /*
@@ -1714,7 +1398,7 @@ Narcissus.parser = (function() {
      */
     function parse(s, f, l) {
         var t = new lexer.Tokenizer(s, f, l);
-        var n = Script(t, false, false);
+        var n = Script(t, false);
         if (!t.done)
             throw t.newSyntaxError("Syntax error");
 
@@ -1722,64 +1406,24 @@ Narcissus.parser = (function() {
     }
 
     /*
-     * parseStdin :: (source, {line number}, string, (string) -> boolean) -> program node
+     * parseStdin :: (source, {line number}) -> node
      */
-    function parseStdin(s, ln, prefix, isCommand) {
-        // the special .begin command is only recognized at the beginning
-        if (s.match(/^[\s]*\.begin[\s]*$/)) {
-            ++ln.value;
-            return parseMultiline(ln, prefix);
-        }
-
-        // commands at the beginning are treated as the entire input
-        if (isCommand(s.trim()))
-            s = "";
-
+    function parseStdin(s, ln) {
         for (;;) {
             try {
                 var t = new lexer.Tokenizer(s, "stdin", ln.value);
-                var n = Script(t, false, false);
+                var n = Script(t, false);
                 ln.value = t.lineno;
                 return n;
             } catch (e) {
                 if (!t.unexpectedEOF)
                     throw e;
-
-                // commands in the middle are not treated as part of the input
-                var more;
-                do {
-                    if (prefix)
-                        putstr(prefix);
-                    more = readline();
-                    if (!more)
-                        throw e;
-                } while (isCommand(more.trim()));
-
+                var more = readline();
+                if (!more)
+                    throw e;
                 s += "\n" + more;
             }
         }
-    }
-
-    /*
-     * parseMultiline :: ({line number}, string | null) -> program node
-     */
-    function parseMultiline(ln, prefix) {
-        var s = "";
-        for (;;) {
-            if (prefix)
-                putstr(prefix);
-            var more = readline();
-            if (more === null)
-                return null;
-            // the only command recognized in multiline mode is .end
-            if (more.match(/^[\s]*\.end[\s]*$/))
-                break;
-            s += "\n" + more;
-        }
-        var t = new lexer.Tokenizer(s, "stdin", ln.value);
-        var n = Script(t, false, false);
-        ln.value = t.lineno;
-        return n;
     }
 
     return {
@@ -1790,9 +1434,7 @@ Narcissus.parser = (function() {
         EXPRESSED_FORM: EXPRESSED_FORM,
         STATEMENT_FORM: STATEMENT_FORM,
         Tokenizer: lexer.Tokenizer,
-        FunctionDefinition: FunctionDefinition,
-        Module: Module,
-        Export: Export
+        FunctionDefinition: FunctionDefinition
     };
 
 }());

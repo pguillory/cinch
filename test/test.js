@@ -11,12 +11,16 @@ cinch.registerExtension({
 
 var tests = {}
 
+function byParseInt(a, b) {
+    return parseInt(a) - parseInt(b)
+}
+
 console.log('\n*** Compiling tests ***')
 var tests_dir = path.join(__dirname, 'tests')
-fs.readdirSync(tests_dir).forEach(function(chapter) {
+fs.readdirSync(tests_dir).sort(byParseInt).forEach(function(chapter) {
     console.log('\nChapter: ' + chapter)
     var chapter_dir = path.join(tests_dir, chapter)
-    fs.readdirSync(chapter_dir).forEach(function(test_name) {
+    fs.readdirSync(chapter_dir).sort(byParseInt).forEach(function(test_name) {
         console.log('Test: ' + test_name)
         var test_dir = path.join(chapter_dir, test_name)
         var test = require(test_dir).test
