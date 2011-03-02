@@ -30,18 +30,22 @@ Since `fileLength_()` ends with an underscore, Cinch will convert it into the fo
         });
     };
 
-Features
---------
-* All language features are mapped to async equivalents.
-* Compiles to pure Javascript with no run-time component.
-* Libraries built with Cinch can be used without it installed.
-* Mix and match Cinch and non-Cinch functions.
-
 Running Cinch code
 ------------------
-Use included script `node-cinch` instead of `node` to run `.js_` files directly.  Or you can call `require('cinch').registerExtension()` from a running script to enable `.js_` modules to be `require()`-ed.
+    npm install cinch
+    node-cinch myfile.js_
 
-As `.js_` modules are loaded, Cinch will save pure-Javascript versions with the `.js` extension.  These are regular Javascript modules and can be used without Cinch.
+As `.js_` modules are loaded, Cinch will save pure-Javascript versions with the `.js` extension.  These are regular modules and can be used without Cinch present.
+
+API
+---
+`cinch.registerExtension()`
+
+Hooks into `require()` functionality to allow `.js_` modules to be loaded.
+
+`cinch.transform(source)`
+
+Transforms a single script and returns the pure-JS version.
 
 History
 -------
