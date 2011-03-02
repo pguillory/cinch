@@ -12,11 +12,4 @@ if (process.argv.length < 2) {
 
 var filename = path.join(process.cwd(), process.argv[1])
 
-path.exists(filename, function(exists) {
-    if (!exists) {
-        console.log('File not found: ' + process.argv[1])
-        process.exit(1)
-    }
-    
-    require(filename)
-})
+require(filename)
