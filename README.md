@@ -41,7 +41,7 @@ Running Cinch code
 ------------------
 Use included script `node-cinch` instead of `node` to run `.js_` files directly.  Or you can call `require('cinch').registerExtension()` from a running script to enable `.js_` modules to be `require()`-ed.
 
-Alternatively, you can use `node-cinch-save` or `registerExtension({ saveSource: true })` to have it save pure-Javascript copies of your Cinch modules as `.js` files.  These are regular Javascript modules and can be used without Cinch.
+As `.js_` modules are loaded, Cinch will save pure-Javascript versions with the `.js` extension.  These are regular Javascript modules and can be used without Cinch.
 
 History
 -------

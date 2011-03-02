@@ -5,8 +5,7 @@ var fs = require('fs')
 var path = require('path')
 
 cinch.registerExtension({
-    saveSource: true,
-    saveParseTree: true,
+    saveParseTree: true
 })
 
 var tests = {}
