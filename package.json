@@ -15,6 +15,6 @@
     "node": "*"
   },
   "bin": {
-      "node-cinch": "./bin/node-cinch",
+      "node-cinch": "./bin/node-cinch"
   }
 }
