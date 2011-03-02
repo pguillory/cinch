@@ -19,7 +19,7 @@ Example
         return fs.readFile_(path).length;
     };
 
-The function `fileLength_()` will be converted into the following:
+Since `fileLength_()` ends with an underscore, Cinch will convert it into the following:
 
     function fileLength(path, callback) {
         fs.readFile(path, function(err, result) {
@@ -29,6 +29,13 @@ The function `fileLength_()` will be converted into the following:
             return callback(null, result.length);
         });
     };
+
+Features
+--------
+* All language features are mapped to async equivalents.
+* Compiles to pure Javascript with no run-time component.
+* Libraries built with Cinch can be used without it installed.
+* Mix and match Cinch and non-Cinch functions.
 
 Running Cinch code
 ------------------
