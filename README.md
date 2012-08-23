@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/pguillory/cinch.png)](http://travis-ci.org/pguillory/cinch)
 Cinch is a Javascript source transformation tool.  It allows you to write asynchronous, non-blocking code in a clean, synchronous form.
 
 Cinch modules use the extension `.js_` and contain regular Javascript syntax, with one bonus.  The Cinch engine will transform any function whose name ends in an underscore into asynchronous form.  The new function will have the same name (minus the underscore) and an extra callback parameter.
